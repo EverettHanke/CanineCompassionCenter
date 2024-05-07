@@ -16,7 +16,7 @@ require_once ('vendor/autoload.php');
 $f3 = Base::instance();
 
 //Reroute to home Page @BASE
-$f3->route('GET|POST /Home', function ($f3){
+$f3->route('GET /', function ($f3){
 
     //var_dump($f3->get('SESSION'));
 
