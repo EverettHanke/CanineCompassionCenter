@@ -1,0 +1,20 @@
+{
+  "name": "everetth/SDEV328/CanineCompassionCenter",
+  "authors": [
+    {
+      "name": "Everett Hanke",
+      "email": "hanke.everett@student.greenriver.edu"
+    },
+    {
+      "name": "Pedro Valdovinos-Reyes",
+      "email": "hanke.everett@student.greenriver.edu"
+    },
+    {
+      "name": "Nathan Tapia-Ramirez",
+      "email": "hanke.everett@student.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
