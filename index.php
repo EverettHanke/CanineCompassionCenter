@@ -27,6 +27,13 @@ $f3->route('GET /', function ($f3){
     echo $view->render('views/home.html');
 });
 
+// NTR 5/7 Reroute to Our Dogs page
+$f3->route('GET /ourDogs', function (){
+    //Render a view page
+    $view = new Template();
+    echo $view->render('views/ourDogs.html');
+});
+
 
 //run Fat Free
 $f3->run();
