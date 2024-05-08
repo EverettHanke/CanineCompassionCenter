@@ -16,10 +16,11 @@ require_once ('vendor/autoload.php');
 $f3 = Base::instance();
 
 //Reroute to home Page @BASE
-$f3->route('GET /', function ($f3){
+$f3->route('GET|POST /', function ($f3){
 
     //var_dump($f3->get('SESSION'));
 
+    //No clue if we will need post here but better safe than sorry
 
 
     //Render a view page
@@ -28,8 +29,12 @@ $f3->route('GET /', function ($f3){
 });
 
 // NTR 5/7 Reroute to Our Dogs page
-$f3->route('GET /ourDogs', function (){
+$f3->route('GET|POST /ourDogs', function (){
     //Render a view page
+
+    //POST will be when we filter and refilter for certain Dogs
+
+
     $view = new Template();
     echo $view->render('views/ourDogs.html');
 });
