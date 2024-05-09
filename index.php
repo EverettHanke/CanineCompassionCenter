@@ -48,6 +48,12 @@ $f3->route('GET|POST /ourDogs', function ($f3){
     echo $view->render('views/ourDogs.html');
 });
 
+// NTR 5/8 reroute to dogCards
+$f3->route('GET|POST /dogCards', function (){
+    $view = new Template();
+    echo $view->render('views/dogCards.html');
+});
+
 
 //run Fat Free
 $f3->run();
