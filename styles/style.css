@@ -5,22 +5,35 @@
 <<<<<<< HEAD
 }
 
+/*
 .carousel-item
 {
-    /*display: block;*/
+    display: block;
     float: left;
     width: 100%;
     height: 600px;
     margin-right: -100%;
-    display: none; /*Hide all items initially */
+    display: none; Hide all items initially
 
 }
+ */
 
 .divider
 {
     border-bottom: 2px solid black;
 }
 
+<<<<<<< HEAD
+.scheduleConfirm
+{
+    .center {
+        margin: auto;
+        width: 50%;
+        border: 3px solid green;
+        padding: 10px;
+    }
+}
+=======
 /*NTR 5/9 for dogCards*/
 .hover-div {
     padding: 20px 20px;
@@ -46,3 +59,4 @@
     border-radius: 5px;
 }
 
+>>>>>>> 523b74a16c7e2684776b3dec1b727d2122bbe0d1
