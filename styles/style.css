@@ -2,6 +2,7 @@
 {
     border-right: 2px solid black;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 .carousel-item
@@ -14,13 +15,8 @@
     display: none; /*Hide all items initially */
 
 }
-.carousel-item.active
-{
-    display: block;
-}
+
 .divider
 {
     border-bottom: 2px solid black;
-=======
->>>>>>> parent of d405bb2 (Carousel styles implemented)
 }
