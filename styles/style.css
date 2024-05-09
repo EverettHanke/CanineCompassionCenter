@@ -1,6 +1,7 @@
 .filterNav
 {
     border-right: 2px solid black;
+<<<<<<< HEAD
 }
 
 .carousel-item
@@ -20,4 +21,6 @@
 .divider
 {
     border-bottom: 2px solid black;
+=======
+>>>>>>> parent of d405bb2 (Carousel styles implemented)
 }
