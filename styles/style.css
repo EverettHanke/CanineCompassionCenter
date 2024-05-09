@@ -2,3 +2,10 @@
 {
     border-right: 2px solid black;
 }
+
+.carousel-item {
+    display: block;
+    float: left;
+    width: 100%;
+    margin-right: -100%;
+}
