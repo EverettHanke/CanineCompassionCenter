@@ -54,6 +54,13 @@ $f3->route('GET|POST /dogCards', function (){
     echo $view->render('views/dogCards.html');
 });
 
+// PVR 5/9 reroute to scheduling
+// Will change later, quick tester for now
+$f3->route('GET|POST /schedule', function (){
+    $view = new Template();
+    echo $view->render('views/schedule.html');
+});
+
 
 //run Fat Free
 $f3->run();
