@@ -1,8 +1,6 @@
 .filterNav
 {
     border-right: 2px solid black;
-<<<<<<< HEAD
-<<<<<<< HEAD
 }
 
 /*
@@ -23,7 +21,6 @@
     border-bottom: 2px solid black;
 }
 
-<<<<<<< HEAD
 .scheduleConfirm
 {
     .center {
@@ -33,7 +30,7 @@
         padding: 10px;
     }
 }
-=======
+
 /*NTR 5/9 for dogCards*/
 .hover-div {
     padding: 20px 20px;
@@ -59,4 +56,4 @@
     border-radius: 5px;
 }
 
->>>>>>> 523b74a16c7e2684776b3dec1b727d2122bbe0d1
+
