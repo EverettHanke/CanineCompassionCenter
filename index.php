@@ -11,6 +11,7 @@ error_reporting(E_ALL);
 
 //Import what we require here!
 require_once ('vendor/autoload.php');
+require_once ('model/data-layers.php');
 
 //Instantiate Fat-Free
 $f3 = Base::instance();
@@ -29,12 +30,20 @@ $f3->route('GET|POST /', function ($f3){
 });
 
 // NTR 5/7 Reroute to Our Dogs page
-$f3->route('GET|POST /ourDogs', function (){
+$f3->route('GET|POST /ourDogs', function ($f3){
     //Render a view page
 
     //POST will be when we filter and refilter for certain Dogs
 
-
+    //set breed below
+    $breed = getFilterBreeds();
+    $f3->set('breed', $breed);
+    //set personality below
+    $personality = getFilterPersonality();
+    $f3->set('personality', $personality);
+    //set age group below
+    $age = getFilterAge();
+    $f3->set('age', $age);
     $view = new Template();
     echo $view->render('views/ourDogs.html');
 });
