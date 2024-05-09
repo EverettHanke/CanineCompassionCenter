@@ -20,12 +20,10 @@
 
 .scheduleConfirm
 {
-    .center {
         margin: auto;
         width: 50%;
-        border: 3px solid green;
+        border: 10px black;
         padding: 10px;
-    }
 }
 
 /*NTR 5/9 for dogCards*/
