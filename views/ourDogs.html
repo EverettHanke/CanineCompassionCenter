@@ -33,11 +33,12 @@
                     <repeat group="{{ @breed }}" value="{{ @breedValue }}">
                         <label><input type="checkbox" name="breed" value="{{ @breedValue }}"> {{ ucfirst(@breedValue) }} </label><br>
                     </repeat>
-
+                    <div class="col-12 divider"></div>
                     <!-- FILTER GROUP FOR PERSONALITY BELOW -->
                     <repeat group="{{ @personality }}" value="{{ @personalityValue }}">
                         <label><input type="checkbox" name="personality" value="{{ @personalityValue }}"> {{ ucfirst(@personalityValue) }} </label><br>
                     </repeat>
+                    <div class="col-12 divider"></div>
 
                     <!-- FILTER GROUP FOR AGE GROUP BELOW -->
                     <repeat group="{{ @age }}" value="{{ @ageValue }}">
