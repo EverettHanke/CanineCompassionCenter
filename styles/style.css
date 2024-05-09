@@ -5,10 +5,18 @@
 
 .carousel-item
 {
-    display: block;
+    /*display: block;*/
     float: left;
     width: 100%;
+    height: 600px;
     margin-right: -100%;
+    display: none; /*Hide all items initially */
+
+
+}
+.carousel-item.active
+{
+    display: block;
 }
 .divider
 {
