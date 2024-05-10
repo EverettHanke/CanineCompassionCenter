@@ -1,43 +1,63 @@
 <include href="views/header.html"></include>
 
 <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <!--Add company Logo Later -->
-                <a class="navbar-brand" href="#">
-                    <img src="" width="30" height="30" class="d-inline-block align-top" alt="Company Logo">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ @BASE }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="ourDogs">Our Dogs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="schedule">Schedule Appointment</a>
-                        </li>
-                    </ul>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <!--Add company Logo Later -->
+            <a class="navbar-brand" href="#">
+                <img src="" width="30" height="30" class="d-inline-block align-top" alt="Company Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ @BASE }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ourDogs">Our Dogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="schedule">Schedule Appointment</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="scheduleConfirm">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="box">
+                    <h2>Schedule Appointment</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNum">Phone Number:</label>
+                            <input type="text" class="form-control" id="phoneNum" name="phoneNum">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" class="form-control" id="date" name="date">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
-        </nav>
-
-    <div class="scheduleConfirm"><br><br>
-        <label for="fname">Please enter your name:</label>
-        <input type="text" id="fname" name="fname"><br>
-        <label for="email">Please enter your email:</label>
-        <input type="text" id="email" name="email"><br>
-        <label for="phoneNum">Please enter your phone number:</label>
-        <input type="text" id="phoneNum" name="phoneNum"><br>
+        </div>
     </div>
 
-    </div>
+</div>
 
 </body>
 </html>
