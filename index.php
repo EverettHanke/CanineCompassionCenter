@@ -32,7 +32,10 @@ $f3->route('GET|POST /ourDogs', function ($f3){
     //Render a view page
 
     //POST will be when we filter and refilter for certain Dogs
-
+    if ($_SERVER['REQUEST_METHOD'] == "POST")
+    {
+        var_dump($_POST);
+    }
     //set breed below
     $breed = getFilterBreeds();
     $f3->set('breed', $breed);
@@ -47,9 +50,14 @@ $f3->route('GET|POST /ourDogs', function ($f3){
 });
 
 // NTR 5/8 reroute to dogCards
-$f3->route('GET|POST /dogCards', function (){
+$f3->route('GET|POST /login', function ()
+{
+    if ($_SERVER['REQUEST_METHOD'] == "POST")
+    {
+        var_dump($_POST);
+    }
     $view = new Template();
-    echo $view->render('views/dogCards.html');
+    echo $view->render('views/login.html');
 });
 
 // PVR 5/9 reroute to scheduling

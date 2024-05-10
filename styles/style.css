@@ -128,3 +128,12 @@ a.hover-div {
     color: white;
     text-decoration-color: white;
 }
+.dogCard
+{
+    border: 1px solid gray;
+    border-radius: 8px;
+}
+.nav-right
+{
+    float: right;
+}
