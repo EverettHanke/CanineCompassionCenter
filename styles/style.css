@@ -80,4 +80,14 @@
     padding: 0 20px;
 }
 
+.box {
+    border: 2px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200%;
+    margin-left: -50%;
+}
 
+.form-group {
+    margin-bottom: 20px;
+}
