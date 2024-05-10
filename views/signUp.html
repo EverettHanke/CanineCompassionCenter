@@ -35,7 +35,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="box">
-                    <h2>Login</h2>
+                    <h2>Sign Up</h2>
                     <form method="POST" action="#">
                         <div class="form-group">
                             <label for="userName">UserName:</label>
@@ -46,13 +46,21 @@
                             <input type="email" class="form-control" id="userEmail" name="userEmail">
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
+                            <label for="phoneNum">Phone Number:</label>
+                            <input type="text" class="form-control" id="phoneNum" name="phoneNum">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
                             <input type="text" class="form-control" id="password" name="password">
                         </div>
-                        <div class="centerContent">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password:</label>
+                            <input type="text" class="form-control" id="confirmPassword" name="confirmPassword">
                         </div>
-                        <p class="centerContent">If you do not have an account and wish to sign up <a href="signUp">click here</a></p>
+                        <div class="centerContent">
+                            <button type="submit" class="btn btn-primary centerContent">Submit</button>
+                        </div>
+                        <p class="centerContent"><a href="login">click here</a> to return to login page</p>
                     </form>
                 </div>
             </div>

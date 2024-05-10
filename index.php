@@ -10,6 +10,7 @@ error_reporting(E_ALL);
 //Import what we require here!
 require_once ('vendor/autoload.php');
 require_once ('model/data-layers.php');
+require_once ('model/validation.php');
 
 //Instantiate Fat-Free
 $f3 = Base::instance();
@@ -49,7 +50,7 @@ $f3->route('GET|POST /ourDogs', function ($f3){
     echo $view->render('views/ourDogs.html');
 });
 
-// NTR 5/8 reroute to dogCards
+// EAH login reroute
 $f3->route('GET|POST /login', function ()
 {
     if ($_SERVER['REQUEST_METHOD'] == "POST")
@@ -58,6 +59,65 @@ $f3->route('GET|POST /login', function ()
     }
     $view = new Template();
     echo $view->render('views/login.html');
+});
+
+// EAH SignUp reroute
+$f3->route('GET|POST /signUp', function ($f3)
+{
+    if ($_SERVER['REQUEST_METHOD'] == "POST")
+    {
+        $userName = "";
+        $password = "";
+        $email = "";
+        $phone = "";
+        if (validateUserName($_POST['userName']))
+        {
+            $userName = $_POST['userName'];
+        }
+        else
+        {
+            $f3->set('errors["userName"]', 'Please enter at valid username with no numbers');
+        }
+        if (validateEmail($_POST['userEmail']))
+        {
+            $email = $_POST['userEmail'];
+        }
+        else
+        {
+            $f3->set('errors["userEmail"]', 'Please enter a valid email');
+        }
+        if (validatePhone($_POST['phoneNum']))
+        {
+            $phone = $_POST['phoneNum'];
+        }
+        else
+        {
+            $f3->set('errors["phoneNum"]', 'Please enter at valid phone number');
+        }
+        if (validatePassword($_POST['password'],$_POST['confirmPassword']))
+        {
+            $password = $_POST['password'];
+        }
+        else
+        {
+            $f3->set('errors["password"]', 'Please enter a matching password');
+        }
+        if (empty($f3->get('errors')))
+        {
+            //create profile object
+
+            //pass profile over to data base
+
+            //if user send them back to home page
+
+            //if admin send them onto admin screen
+
+            //test var_dump for now
+            var_dump($userName, $password, $email, $phone);
+        }
+    }
+    $view = new Template();
+    echo $view->render('views/signUp.html');
 });
 
 // PVR 5/9 reroute to scheduling
