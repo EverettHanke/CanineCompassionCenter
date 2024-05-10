@@ -3,7 +3,6 @@
     border-right: 2px solid black;
 }
 
-
 .carousel-item
 {
     float: left;
@@ -96,4 +95,16 @@
 {
     width: 150px;
     height: 75px;
+}
+
+a.hover-div:hover {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color from parent */
+}
+a.hover-div {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color from parent */
+}
+.hover-div {
+    display: block;
 }
