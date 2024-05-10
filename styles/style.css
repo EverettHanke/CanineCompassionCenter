@@ -50,4 +50,34 @@
     border-radius: 5px;
 }
 
+.aboutUs {
+    padding-top: 50px; /* Adjust as needed */
+    padding-bottom: 50px; /* Adjust as needed */
+}
+
+.aboutUs h1 {
+    margin-bottom: 20px;
+}
+
+.aboutUs .row {
+    align-items: center; /* Vertically center content */
+}
+
+.divider {
+    border-top: 2px solid black;
+    margin: 30px 0; /* Adjust as needed */
+}
+
+.vertical-divider
+{
+    border-left: 2px solid black;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.aboutUs .col-md-6 {
+    border-right: 2px solid black;
+    padding: 0 20px;
+}
+
 
