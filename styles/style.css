@@ -119,3 +119,12 @@ a.hover-div {
     align-items: center;
 
 }
+.navbar
+{
+    background-color: #E7825E;
+}
+.nav-link a
+{
+    color: white;
+    text-decoration-color: white;
+}
