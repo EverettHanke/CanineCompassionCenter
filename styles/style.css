@@ -111,3 +111,11 @@ a.hover-div {
 .hover-div {
     display: block;
 }
+
+.centerContent
+{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+}
