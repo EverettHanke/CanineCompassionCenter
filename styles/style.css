@@ -91,3 +91,9 @@
 .form-group {
     margin-bottom: 20px;
 }
+
+.card-img-top
+{
+    width: 150px;
+    height: 75px;
+}
