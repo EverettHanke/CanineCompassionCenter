@@ -1,8 +1,6 @@
 <?php
 /*
- * Everett
- * Pedro
- * Nathan
+ * AUTHORS: Everett, Pedro, Nathan
  */
 
 //turn on error reporting
