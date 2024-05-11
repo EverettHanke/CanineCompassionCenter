@@ -11,6 +11,7 @@ error_reporting(E_ALL);
 require_once ('vendor/autoload.php');
 require_once ('model/data-layers.php');
 require_once ('model/validation.php');
+require_once ('model/dogs.php');
 
 //Instantiate Fat-Free
 $f3 = Base::instance();
@@ -37,6 +38,11 @@ $f3->route('GET|POST /ourDogs', function ($f3){
     {
         var_dump($_POST);
     }
+
+    //testing for now
+    //Instantiate some dog classes to fill our cards
+
+
     //set breed below
     $breed = getFilterBreeds();
     $f3->set('breed', $breed);
