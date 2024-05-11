@@ -41,7 +41,13 @@ $f3->route('GET|POST /ourDogs', function ($f3){
 
     //testing for now
     //Instantiate some dog classes to fill our cards
-
+    $personality1 = array("Friendly", "Social Butterfly");
+    $dog1 = new Dogs("Libby", "1 - 3 years", "German Shepherd", "Female", $personality1, 200);
+    $dog2 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
+    $dog3 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
+    $dog4 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
+    $dogDatabase = array($dog1, $dog2, $dog3, $dog4);
+    $f3->set('dogDataBase', $dogDatabase);
 
     //set breed below
     $breed = getFilterBreeds();

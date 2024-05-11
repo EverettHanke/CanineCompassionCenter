@@ -1,6 +1,6 @@
 <?php
 
-class Dog extends Pets
+class Dogs extends Pets
 {
 
 }
