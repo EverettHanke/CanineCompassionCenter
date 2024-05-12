@@ -141,3 +141,11 @@ a.hover-div {
 {
     float: left;
 }
+table, tr, td, th
+{
+    border: 1px solid black;
+}
+th
+{
+    background-color: lightgray;
+}

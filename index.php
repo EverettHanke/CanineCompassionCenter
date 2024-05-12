@@ -145,12 +145,30 @@ $f3->route('GET|POST /schedule', function (){
 });
 
 //EAH Admin page routing
-$f3->route('GET|POST /admin', function ()
+$f3->route('GET|POST /admin', function ($f3)
 {
     if ($_SERVER['REQUEST_METHOD'] == "POST")
     {
         var_dump($_POST);
     }
+
+    $personality1 = array("Friendly", "Social Butterfly");
+    $dog1 = new Dogs("Libby", "1 - 3 years", "German Shepherd", "Female", $personality1, 200);
+    $dog2 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
+    $dog3 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 250);
+    $dog4 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 50);
+    $dogDataBase = array($dog1, $dog2, $dog3, $dog4);
+    $f3->set('dogDataBase', $dogDataBase);
+
+    $breed = getFilterBreeds();
+    $f3->set('breed', $breed);
+    //set personality below
+    $personality = getFilterPersonality();
+    $f3->set('personality', $personality);
+    //set age group below
+    $age = getFilterAge();
+    $f3->set('age', $age);
+
     $view = new Template();
     echo $view->render('views/admin.html');
 });
