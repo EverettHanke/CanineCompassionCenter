@@ -43,6 +43,7 @@ $f3->route('GET|POST /ourDogs', function ($f3){
 
     //testing for now
     //Instantiate some dog classes to fill our cards
+    //these manually made cards will be replaced once we have things connected to a database
     $personality1 = array("Friendly", "Social Butterfly");
     $dog1 = new Dogs("Libby", "1 - 3 years", "German Shepherd", "Female", $personality1, 200);
     $dog2 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
@@ -50,7 +51,7 @@ $f3->route('GET|POST /ourDogs', function ($f3){
     $dog4 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 50);
     $dogDataBase = array($dog1, $dog2, $dog3, $dog4);
     $f3->set('dogDataBase', $dogDataBase);
-    var_dump($f3->get('dogDataBase'));
+    //var_dump($f3->get('dogDataBase'));
 
     //set breed below
     $breed = getFilterBreeds();
@@ -66,11 +67,12 @@ $f3->route('GET|POST /ourDogs', function ($f3){
 });
 
 // EAH login reroute
-$f3->route('GET|POST /login', function ()
+$f3->route('GET|POST /login', function ($f3)
 {
     if ($_SERVER['REQUEST_METHOD'] == "POST")
     {
         var_dump($_POST);
+        $f3->reroute("admin");
     }
     $view = new Template();
     echo $view->render('views/login.html');
@@ -142,6 +144,16 @@ $f3->route('GET|POST /schedule', function (){
     echo $view->render('views/schedule.html');
 });
 
+//EAH Admin page routing
+$f3->route('GET|POST /admin', function ()
+{
+    if ($_SERVER['REQUEST_METHOD'] == "POST")
+    {
+        var_dump($_POST);
+    }
+    $view = new Template();
+    echo $view->render('views/admin.html');
+});
 
 //run Fat Free
 $f3->run();
