@@ -41,4 +41,8 @@ class Pets
     {
         return $this->_personality;
     }
+    function getPrice()
+    {
+        return $this->_price;
+    }
 }

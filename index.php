@@ -11,7 +11,9 @@ error_reporting(E_ALL);
 require_once ('vendor/autoload.php');
 require_once ('model/data-layers.php');
 require_once ('model/validation.php');
+require_once ('model/pets.php');
 require_once ('model/dogs.php');
+
 
 //Instantiate Fat-Free
 $f3 = Base::instance();
@@ -44,10 +46,11 @@ $f3->route('GET|POST /ourDogs', function ($f3){
     $personality1 = array("Friendly", "Social Butterfly");
     $dog1 = new Dogs("Libby", "1 - 3 years", "German Shepherd", "Female", $personality1, 200);
     $dog2 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
-    $dog3 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
-    $dog4 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
-    $dogDatabase = array($dog1, $dog2, $dog3, $dog4);
-    $f3->set('dogDataBase', $dogDatabase);
+    $dog3 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 250);
+    $dog4 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 50);
+    $dogDataBase = array($dog1, $dog2, $dog3, $dog4);
+    $f3->set('dogDataBase', $dogDataBase);
+    var_dump($dogDataBase);
 
     //set breed below
     $breed = getFilterBreeds();
