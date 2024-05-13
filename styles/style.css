@@ -149,3 +149,9 @@ th
 {
     background-color: lightgray;
 }
+
+.logo-image
+{
+    height: 200px;
+    width: 200px;
+}
