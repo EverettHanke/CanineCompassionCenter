@@ -150,6 +150,7 @@ $f3->route('GET|POST /admin', function ($f3)
     if ($_SERVER['REQUEST_METHOD'] == "POST")
     {
         var_dump($_POST);
+        var_dump($_FILES);
     }
 
     $personality1 = array("Friendly", "Social Butterfly");
