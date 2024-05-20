@@ -8,9 +8,10 @@ class Pets
     private $_breed;
     private $_personality;
     private $_price;
+    private $_image;
 
     public function __construct($_name="Name Error", $_age="Age Error",$_breed="Breed Error",$_gender="Gender Error"
-        ,$_personality="Array Personality Error", $_price=0)
+        ,$_personality="Array Personality Error", $_price=0, $_image=NULL)
     {
         $this->_name = $_name;
         $this->_age = $_age;
@@ -18,6 +19,7 @@ class Pets
         $this->_gender = $_gender;
         $this->_personality = $_personality;
         $this->_price = $_price;
+        $this->_image = $_image;
     }
 
     function getName()
@@ -44,5 +46,10 @@ class Pets
     function getPrice()
     {
         return $this->_price;
+    }
+
+    function getImage()
+    {
+        return $this->_image;
     }
 }
