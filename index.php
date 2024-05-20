@@ -151,6 +151,15 @@ $f3->route('GET|POST /admin', function ($f3)
     {
         var_dump($_POST);
         var_dump($_FILES);
+        //Potentially grab this and upload it to userImages later once we have dbConnect set up??
+        $file_name = $_FILES['image']['name'];
+        $folder = 'userImages/'.$file_name;
+        /*$query = mysqli_query($stmt, "Insert into userImages (file) values ('$file_name')");
+        if (move_uploaded_file($file_name, $folder))
+        {
+            //success
+        }*/
+
     }
 
     $personality1 = array("Friendly", "Social Butterfly");
