@@ -18,38 +18,38 @@ $f3 = Base::instance();
 $con = new Controller($f3);
 
 //Reroute to home Page @BASE
-$f3->route('GET|POST /', function ($f3){
+$f3->route('GET|POST /', function (){
 
     $GLOBALS['con']->home();
 });
 
 // NTR 5/7 Reroute to Our Dogs page
-$f3->route('GET|POST /ourDogs', function ($f3){
-    $GLOBALS['con']->ourDogs($f3);
+$f3->route('GET|POST /ourDogs', function (){
+    $GLOBALS['con']->ourDogs();
 });
 
 // EAH login reroute
-$f3->route('GET|POST /login', function ($f3)
+$f3->route('GET|POST /login', function ()
 {
-    $GLOBALS['con']->login($f3);
+    $GLOBALS['con']->login();
 });
 
 // EAH SignUp reroute
-$f3->route('GET|POST /signUp', function ($f3)
+$f3->route('GET|POST /signUp', function ()
 {
-    $GLOBALS['con']->signUp($f3);
+    $GLOBALS['con']->signUp();
 });
 
 // PVR 5/9 reroute to scheduling
 // Will change later, quick tester for now
-$f3->route('GET|POST /schedule', function ($f3){
-   $GLOBALS['con']->schedule($f3);
+$f3->route('GET|POST /schedule', function (){
+   $GLOBALS['con']->schedule();
 });
 
 //EAH Admin page routing
-$f3->route('GET|POST /admin', function ($f3)
+$f3->route('GET|POST /admin', function ()
 {
-    $GLOBALS['con']->admin($f3);
+    $GLOBALS['con']->admin();
 });
 
 //run Fat Free
