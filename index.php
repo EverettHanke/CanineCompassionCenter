@@ -168,6 +168,7 @@ $f3->route('GET|POST /admin', function ($f3)
     $dog3 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 250);
     $dog4 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 50);
     $dogDataBase = array($dog1, $dog2, $dog3, $dog4);
+
     $f3->set('dogDataBase', $dogDataBase);
 
     $breed = getFilterBreeds();
