@@ -22,6 +22,12 @@ class Controller
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
             var_dump($_POST);
+            $dogID = $_POST['id'];
+
+            //stmt for getting dog of equal id
+            //set the data we get to the constructor of a dog object in session
+            //and we will re route to schedule
+
         }
         //testing for now
         //Instantiate some dog classes to fill our cards
