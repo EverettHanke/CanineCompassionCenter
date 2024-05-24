@@ -2,6 +2,7 @@
 
 class Pets
 {
+    private $_id;
     private $_name;
     private $_age;
     private $_gender;
@@ -10,9 +11,10 @@ class Pets
     private $_price;
     private $_image;
 
-    public function __construct($_name="Name Error", $_age="Age Error",$_breed="Breed Error",$_gender="Gender Error"
+    public function __construct($id=NULL,$_name="Name Error", $_age="Age Error",$_breed="Breed Error",$_gender="Gender Error"
         ,$_personality="Array Personality Error", $_price=0, $_image=NULL)
     {
+        $this->_id = $id;
         $this->_name = $_name;
         $this->_age = $_age;
         $this->_breed = $_breed;
@@ -22,6 +24,10 @@ class Pets
         $this->_image = $_image;
     }
 
+    function getId()
+    {
+        return $this->_id;
+    }
     function getName()
     {
         return $this->_name;

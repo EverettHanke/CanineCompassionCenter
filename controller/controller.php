@@ -27,10 +27,10 @@ class Controller
         //Instantiate some dog classes to fill our cards
         //these manually made cards will be replaced once we have things connected to a database
         $personality1 = array("Friendly", "Social Butterfly");
-        $dog1 = new Dogs("Libby", "1 - 3 years", "German Shepherd", "Female", $personality1, 200);
-        $dog2 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
-        $dog3 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 250);
-        $dog4 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 50);
+        $dog1 = new Dogs(1,"Libby", "1 - 3 years", "German Shepherd", "Female", $personality1, 200);
+        $dog2 = new Dogs(2,"Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
+        $dog3 = new Dogs(3,"Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 250);
+        $dog4 = new Dogs(4,"Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 50);
         $dogDataBase = array($dog1, $dog2, $dog3, $dog4);
         $this->_f3->set('dogDataBase', $dogDataBase);
         //var_dump($this->_f3->get('dogDataBase'));
