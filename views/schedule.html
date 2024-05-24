@@ -23,6 +23,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="ourDogs">Our Dogs</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link float-end" href="login">Login</a>
+                    </li>
                     <!--<li class="nav-item">
                         <a class="nav-link" href="schedule">Schedule Appointment</a>
                     </li>-->
@@ -30,6 +33,18 @@
             </div>
         </div>
     </nav>
+
+    <div class="row content-sections">
+        <div class="col-md-6 aboutUs">
+            <h2>Schedule an appointment with {{ @dogDataBaseValue->getName() }}!:</h2>
+            <p class="card-breed">Breed: {{ @dogDataBaseValue->getBreed() }}</p>
+            <p class="card-personality">Personality: {{ implode(", ",@dogDataBaseValue->getPersonality()) }}</p>
+            <p class="card-gender">Gender: {{ @dogDataBaseValue->getGender() }}</p>
+            <p class="card-age">Age: {{ @dogDataBaseValue->getAge() }}</p>
+            <p class="card-price">Price: {{ @dogDataBaseValue->getPrice() }}</p>
+            </div>
+        </div>
+
 
     <div class="scheduleConfirm vertical-divider">
         <div class="row justify-content-center">
