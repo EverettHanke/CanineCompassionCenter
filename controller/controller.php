@@ -145,16 +145,16 @@ class Controller
         } catch (PDOException $e) {
             die($e->getMessage());
         }
-        var_dump($_SESSION['scheduleDogID']);
+        var_dump($_SESSION);
         //Call request
         $sql = "SELECT * FROM Pets WHERE PetID = :PetID";
         $stmt = $dbh->prepare($sql);
         $id = $this->_f3->get('SESSION.scheduleDogID');
-        $stmt->bindParam(":PetID", $id);
+        $stmt->bindParam(':PetID', $id, PDO::PARAM_INT);
         $stmt->execute();
 
         //Create Dog object based on results
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $scheduleDog = new Dogs($result['PetID'], $result['Name'], $result['Age'], $result['Breed'], $result['Gender'], $result['Personality'], $result['Price'], $result['Image']);
         $this->_f3->set('scheduleDog', $scheduleDog);
         $view = new Template();

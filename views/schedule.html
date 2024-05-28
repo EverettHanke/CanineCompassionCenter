@@ -37,16 +37,14 @@
     <div class="row content-sections">
         <div class="col-md-6 aboutUs">
             <img src="{{ @scheduleDog->getImage() }}" alt="{{ @scheduleDog->getName }}">
-            <h2>Schedule an appointment with {{ @scheduleDog->getName() }}!:</h2>
+            <h2>Schedule an appointment with {{ @scheduleDog->getName() }}!</h2>
             <p class="card-breed">Breed: {{ @scheduleDog->getBreed() }}</p>
             <p class="card-personality">Personality: {{ @scheduleDog->getPersonality() }}</p>
             <p class="card-gender">Gender: {{ @scheduleDog->getGender() }}</p>
             <p class="card-age">Age: {{ @scheduleDog->getAge() }}</p>
             <p class="card-price">Price: {{ @scheduleDog->getPrice() }}</p>
             </div>
-        </div>
-
-
+    </div>
     <div class="scheduleConfirm vertical-divider">
         <div class="row justify-content-center">
             <div class="col-md-6">
