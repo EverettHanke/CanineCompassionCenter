@@ -36,12 +36,13 @@
 
     <div class="row content-sections">
         <div class="col-md-6 aboutUs">
-            <h2>Schedule an appointment with {{ @dogDataBaseValue->getName() }}!:</h2>
-            <p class="card-breed">Breed: {{ @dogDataBaseValue->getBreed() }}</p>
-            <p class="card-personality">Personality: {{ implode(", ",@dogDataBaseValue->getPersonality()) }}</p>
-            <p class="card-gender">Gender: {{ @dogDataBaseValue->getGender() }}</p>
-            <p class="card-age">Age: {{ @dogDataBaseValue->getAge() }}</p>
-            <p class="card-price">Price: {{ @dogDataBaseValue->getPrice() }}</p>
+            <img src="{{ @scheduleDog->getImage() }}" alt="{{ @scheduleDog->getName }}">
+            <h2>Schedule an appointment with {{ @scheduleDog->getName() }}!:</h2>
+            <p class="card-breed">Breed: {{ @scheduleDog->getBreed() }}</p>
+            <p class="card-personality">Personality: {{ @scheduleDog->getPersonality() }}</p>
+            <p class="card-gender">Gender: {{ @scheduleDog->getGender() }}</p>
+            <p class="card-age">Age: {{ @scheduleDog->getAge() }}</p>
+            <p class="card-price">Price: {{ @scheduleDog->getPrice() }}</p>
             </div>
         </div>
 

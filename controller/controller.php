@@ -28,12 +28,15 @@ class Controller
         //POST will be when we filter and refilter for certain Dogs
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
-            var_dump($_POST);
-            $dogID = $_POST['id'];
+
+            $this->_f3->set('SESSION.scheduleDogID', $_POST['id']);
+            var_dump($_SESSION);
+
 
             //stmt for getting dog of equal id
             //set the data we get to the constructor of a dog object in session
             //and we will re route to schedule
+            $this->_f3->reroute("schedule");
 
         }
         $dogDataBase = array();
@@ -47,9 +50,9 @@ class Controller
         {
             array_push($dogDataBase, new Dogs($row['PetID'], $row['Name'], $row['Age'], $row['Breed'], $row['Gender'], $row['Personality'], $row['Price'], $row['Image']));
         }
-
+        //Populate Cards
         $this->_f3->set('dogDataBase', $dogDataBase);
-        //var_dump($this->_f3->get('dogDataBase'));
+
 
         //set breed below
         $breed = DataLayers::getFilterBreeds();
@@ -134,6 +137,26 @@ class Controller
 
     function schedule()
     {
+        // DB connection
+        $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
+        require_once $path;
+        try {
+            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        var_dump($_SESSION['scheduleDogID']);
+        //Call request
+        $sql = "SELECT * FROM Pets WHERE PetID = :PetID";
+        $stmt = $dbh->prepare($sql);
+        $id = $this->_f3->get('SESSION.scheduleDogID');
+        $stmt->bindParam(":PetID", $id);
+        $stmt->execute();
+
+        //Create Dog object based on results
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $scheduleDog = new Dogs($result['PetID'], $result['Name'], $result['Age'], $result['Breed'], $result['Gender'], $result['Personality'], $result['Price'], $result['Image']);
+        $this->_f3->set('scheduleDog', $scheduleDog);
         $view = new Template();
         echo $view->render('views/schedule.html');
     }
