@@ -134,6 +134,18 @@ class Controller
      * */
     function admin()
     {
+
+        // DB connection
+        $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
+        require_once $path;
+        try {
+            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+
+
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
             var_dump($_POST);
@@ -155,29 +167,22 @@ class Controller
             $Gender = $_POST['dogGender'];
             $Personality = $_POST['dogPersonality'];
             $Price = $_POST['dogPrice'];
-            $Image = '';
 
             // Handle file upload
             if (isset($_FILES['dogProfile']) && $_FILES['dogProfile']['error'] == 0) {
                 $file_name = $_FILES['dogProfile']['name'];
-                $folder = 'images/';
+                $tempName = $_FILES['dogProfile']['tmp_name'];
+                $folder = 'userImages/'.$file_name;
                 $file_path = $folder . $file_name;
 
-                if (move_uploaded_file($_FILES['dogProfile']['tmp_name'], $file_path)) {
-                    $Image = $file_path;
+                if (move_uploaded_file($tempName, $file_path)) {
+                    echo "<h1>SUCCESS</h1>";
                 } else {
                     echo "<p>Failed to move uploaded file.</p>";
                 }
+                //$this->_f3->reroute("admin"); do not use but good working theory for refresh bug.
             }
 
-            // DB connection
-            $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
-            require_once $path;
-            try {
-                $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-            } catch (PDOException $e) {
-                die($e->getMessage());
-            }
 
             // define query
             $sql = 'INSERT INTO Pets (Name,Age,Breed,Gender,Personality,Price,Image)
@@ -191,7 +196,7 @@ class Controller
             $statement->bindParam(':Gender', $Gender);
             $statement->bindParam(':Personality', $Personality);
             $statement->bindParam(':Price', $Price);
-            $statement->bindParam(':Image', $Image);
+            $statement->bindParam(':Image', $file_path);
             // Execute the query
             if ($statement->execute()) {
                 echo "<p>Dog $Name was inserted successfully!</p>";
@@ -201,18 +206,9 @@ class Controller
             }
         } // End of Server request_method = post
 
-        /*NTR 5/23 Doing DB connectivity to see realtime DB data*/
-        // DB connection
-        $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
-        require_once $path;
-        try {
-            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }
 
         // define the query
-        $sql = "SELECT * FROM Pets ORDER BY `Name`";
+        $sql = "SELECT * FROM Pets ORDER BY `PetID` ASC";
         // prepare the statement
         $statement = $dbh->prepare($sql);
         // execute the statement
