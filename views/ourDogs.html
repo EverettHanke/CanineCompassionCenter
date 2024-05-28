@@ -60,17 +60,17 @@
                             <repeat group="{{ @dogDataBase }}" value="{{ @dogDataBaseValue }}">
                                 <div class="col-md-4 mb-4">
                                     <div class="hover-div dogCard">
-                                        <img src="images/fluffyDog.png" class="card-img-top" alt="Image of {{ @dogDataBaseValue->getName() }}">
-                                        <div class="card-body">
-                                            <button type="submit" name="id" value="{{ @dogDataBaseValue->getId() }}" class="invisibleButton">
-                                            <h5 class="card-name">{{ @dogDataBaseValue->getName() }}</h5>
-                                            <p class="card-breed">Breed: {{ @dogDataBaseValue->getBreed() }}</p>
-                                            <p class="card-personality">Personality: {{ implode(", ", @dogDataBaseValue->getPersonality()) }}</p>
-                                            <p class="card-gender">Gender: {{ @dogDataBaseValue->getGender() }}</p>
-                                            <p class="card-age">Age: {{ @dogDataBaseValue->getAge() }}</p>
-                                            <p class="card-price">Price: ${{ @dogDataBaseValue->getPrice() }}</p>
-                                            </button>
-                                        </div>
+                                        <button type="submit" name="id" value="{{ @dogDataBaseValue->getId() }}" class="invisibleButton">
+                                        <img src="{{ @dogDataBaseValue->getImage() }}" class="card-img-top" alt="Image of {{ @dogDataBaseValue->getName() }}">
+                                            <div class="card-body">
+                                                <h5 class="card-name">{{ @dogDataBaseValue->getName() }}</h5>
+                                                <p class="card-breed">Breed: {{ @dogDataBaseValue->getBreed() }}</p>
+                                                <p class="card-personality">Personality: {{ @dogDataBaseValue->getPersonality() }}</p>
+                                                <p class="card-gender">Gender: {{ @dogDataBaseValue->getGender() }}</p>
+                                                <p class="card-age">Age: {{ @dogDataBaseValue->getAge() }}</p>
+                                                <p class="card-price">Price: ${{ @dogDataBaseValue->getPrice() }}</p>
+                                            </div>
+                                        </button>
                                     </div>
                                 </div>
                             </repeat>

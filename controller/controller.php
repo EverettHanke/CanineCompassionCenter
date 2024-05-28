@@ -16,7 +16,14 @@ class Controller
     }
     function ourDogs()
     {
-        //Render a view page
+        // DB connection
+        $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
+        require_once $path;
+        try {
+            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
 
         //POST will be when we filter and refilter for certain Dogs
         if ($_SERVER['REQUEST_METHOD'] == "POST")
@@ -29,15 +36,18 @@ class Controller
             //and we will re route to schedule
 
         }
-        //testing for now
-        //Instantiate some dog classes to fill our cards
-        //these manually made cards will be replaced once we have things connected to a database
-        $personality1 = array("Friendly", "Social Butterfly");
-        $dog1 = new Dogs(1,"Libby", "1 - 3 years", "German Shepherd", "Female", $personality1, 200);
-        $dog2 = new Dogs(2,"Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
-        $dog3 = new Dogs(3,"Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 250);
-        $dog4 = new Dogs(4,"Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 50);
-        $dogDataBase = array($dog1, $dog2, $dog3, $dog4);
+        $dogDataBase = array();
+        //Get the dog cards ready
+        $sql = 'SELECT * FROM Pets ORDER BY PetID ASC ';
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row)
+        {
+            array_push($dogDataBase, new Dogs($row['PetID'], $row['Name'], $row['Age'], $row['Breed'], $row['Gender'], $row['Personality'], $row['Price'], $row['Image']));
+        }
+
         $this->_f3->set('dogDataBase', $dogDataBase);
         //var_dump($this->_f3->get('dogDataBase'));
 
