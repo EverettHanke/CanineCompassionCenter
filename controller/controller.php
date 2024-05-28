@@ -128,40 +128,108 @@ class Controller
         echo $view->render('views/schedule.html');
     }
 
+    /**
+     * This is used for the admin page, displays the data in the DB and offers a way to add a dog to the DB.
+     *
+     * */
     function admin()
     {
-
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
             var_dump($_POST);
             var_dump($_FILES);
-            //Potentially grab this and upload it to userImages later once we have dbConnect set up??
-            $file_name = $_FILES['image']['name'];
-            $folder = 'userImages/'.$file_name;
-            /*$query = mysqli_query($stmt, "Insert into userImages (file) values ('$file_name')");
-            if (move_uploaded_file($file_name, $folder))
-            {
-                //success
-            }*/
 
+            /*//Potentially grab this and upload it to userImages later once we have dbConnect set up??
+                $file_name = $_FILES['image']['name'];
+                $folder = 'userImages/'.$file_name;
+                $query = mysqli_query($stmt, "Insert into userImages (file) values ('$file_name')");
+                if (move_uploaded_file($file_name, $folder))
+                {
+                    //success
+                }*/
+
+            // Get data from the form
+            $Name = $_POST['dogName'];
+            $Age = $_POST['dogAge'];
+            $Breed = $_POST['dogBreed'];
+            $Gender = $_POST['dogGender'];
+            $Personality = $_POST['dogPersonality'];
+            $Price = $_POST['dogPrice'];
+            $Image = '';
+
+            // Handle file upload
+            if (isset($_FILES['dogProfile']) && $_FILES['dogProfile']['error'] == 0) {
+                $file_name = $_FILES['dogProfile']['name'];
+                $folder = 'images/';
+                $file_path = $folder . $file_name;
+
+                if (move_uploaded_file($_FILES['dogProfile']['tmp_name'], $file_path)) {
+                    $Image = $file_path;
+                } else {
+                    echo "<p>Failed to move uploaded file.</p>";
+                }
+            }
+
+            // DB connection
+            $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
+            require_once $path;
+            try {
+                $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+
+            // define query
+            $sql = 'INSERT INTO Pets (Name,Age,Breed,Gender,Personality,Price,Image)
+                    VALUES (:Name, :Age, :Breed, :Gender, :Personality, :Price, :Image)';
+            // prepare query
+            $statement = $dbh->prepare($sql);
+            // binding data
+            $statement->bindParam(':Name', $Name);
+            $statement->bindParam(':Age', $Age);
+            $statement->bindParam(':Breed', $Breed);
+            $statement->bindParam(':Gender', $Gender);
+            $statement->bindParam(':Personality', $Personality);
+            $statement->bindParam(':Price', $Price);
+            $statement->bindParam(':Image', $Image);
+            // Execute the query
+            if ($statement->execute()) {
+                echo "<p>Dog $Name was inserted successfully!</p>";
+            } else {
+                $errorInfo = $statement->errorInfo();
+                echo "<p>Error inserting dog $Name. Error: " . $errorInfo[2] . "</p>";
+            }
+        } // End of Server request_method = post
+
+        /*NTR 5/23 Doing DB connectivity to see realtime DB data*/
+        // DB connection
+        $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
+        require_once $path;
+        try {
+            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        } catch (PDOException $e) {
+            die($e->getMessage());
         }
 
-        $personality1 = array("Friendly", "Social Butterfly");
-        $dog1 = new Dogs("Libby", "1 - 3 years", "German Shepherd", "Female", $personality1, 200);
-        $dog2 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 150);
-        $dog3 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 250);
-        $dog4 = new Dogs("Marq", "1 - 3 years", "Dahcshund", "Male", $personality1, 50);
-        $dogDataBase = array($dog1, $dog2, $dog3, $dog4);
+        // define the query
+        $sql = "SELECT * FROM Pets ORDER BY `Name`";
+        // prepare the statement
+        $statement = $dbh->prepare($sql);
+        // execute the statement
+        $statement->execute();
+        // process the result in the html form
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $this->_f3->set('dbDogs', $result);
+        /*NTR 5/23 Doing DB connectivity to see realtime DB data END*/
 
-        $this->_f3->set('dogDataBase', $dogDataBase);
-
+        // providing data to offer for html form
         $breed = DataLayers::getFilterBreeds();
         $this->_f3->set('breed', $breed);
         //set personality below
         $personality = DataLayers::getFilterPersonality();
         $this->_f3->set('personality', $personality);
-        //set age group below
-        $age = DataLayers::getFilterAge();
+        //set age group below - NTR: I edit this to offer integers since the Pets table is INT when it would return strings
+        $age = DataLayers::getAgeInYears();
         $this->_f3->set('age', $age);
 
         $view = new Template();

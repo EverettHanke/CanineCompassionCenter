@@ -46,8 +46,8 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6 aboutUs">
-                <div class="centerContent">
+            <div class="col-md-7 dogDB">
+                <!--<div class="centerContent">
                     <h3>Dog DataBase</h3>
                     <table>
                         <tr>
@@ -69,14 +69,38 @@
                             </tr>
                         </repeat>
                     </table>
-                </div>
+                </div>-->
+                <!--NTR Testing DB Connection, this table will reflect our DB in myPHPAd-->
                 <div class="row">
                     <div class="centerContent">
-
+                        <h3>Dog DataBase NTR</h3>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Pet ID</th>
+                                <th>Name</th>
+                                <th>Breed</th>
+                                <th>Personality</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Price</th>
+                            </tr>
+                            <repeat group="{{ @dbDogs }}" value="{{ @dog }}">
+                                <tr>
+                                    <td>{{ @dog['PetID'] }}</td>
+                                    <td>{{ @dog['Name'] }}</td>
+                                    <td>{{ @dog['Breed'] }}</td>
+                                    <td>{{ @dog['Personality'] }}</td>
+                                    <td>{{ @dog['Gender'] }}</td>
+                                    <td>{{ @dog['Age'] }}</td>
+                                    <td>{{ @dog['Price'] }}</td>
+                                </tr>
+                            </repeat>
+                        </table>
                     </div>
                 </div>
+                <!--NTR Testing DB Connection, this table will reflect our DB in myPHPAd END-->
             </div>
-            <div class="col-md-6 vertical-divider">
+            <div class="col-md-5 vertical-divider">
                 <!-- Add dog to our data base -->
                 <form method="POST" action="#" enctype="multipart/form-data">
                     <div class="form-group">
@@ -84,24 +108,30 @@
                         <input type="text" class="form-control" id="dogName" name="dogName">
                     </div>
                     <div class="form-group">
-                        <label for="dogBreed">Breed</label>
+                        <label for="dogBreed">Breed:</label>
                         <select name="dogBreed" id="dogBreed">
                             <repeat group="{{ @breed }}" value="{{ @breedValue }}">
-                               <option value="{{ @breedValue }}"> {{ ucfirst(@breedValue) }} </option>
+                                <option value="{{ @breedValue }}"> {{ ucfirst(@breedValue) }} </option>
                             </repeat>
                         </select>
-                        <label>Personality</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Personality:</label>
                         <select name="dogPersonality" id="dogPersonality">
                             <repeat group="{{ @personality }}" value="{{ @personalityValue }}">
                                 <option value="{{ @personalityValue }}"> {{ ucfirst(@personalityValue) }}</option>
                             </repeat>
                         </select>
+                    </div>
+                    <div class="form-group">
                         <label for="dogGender">Gender</label>
                         <select name="dogGender" id="dogGender">
                             <option value="Female">Female</option>
                             <option value="Male">Male</option>
                         </select>
-                        <label for="dogAge">Age</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="dogAge">Age in Human Years</label>
                         <select name="dogAge" id="dogAge">
                             <repeat group="{{ @age }}" value="{{ @ageValue }}">
                                 <option value="{{ @ageValue }}"> {{ ucfirst(@ageValue) }} </option>
@@ -109,14 +139,20 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="dogProfile"></label>
+                        <label for="dogName">Price $USD:</label>
+                        <input type="text" class="form-control" id="dogPrice" name="dogPrice">
+                    </div>
+                    <div class="form-group">
+                        <label for="dogProfile">Upload Dog Picture:</label>
                         <input class="dogProfile" type="file" name="dogProfile" id="dogProfile" accept="image/png, image/gif, image/jpeg">
                     </div>
-                    <div class="centerContent">
+                    <div class="centerContent mt-5">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
-                    <p class="centerContent">Be sure to see that all data is correct before submitting</p>
-                    <p class="centerContent">As of now submitting doesn't do anything we will add to the database in time</p>
+                    <div class="content mt-5">
+                        <p class="centerContent">Be sure to see that all data is correct before submitting</p>
+                        <p class="centerContent">As of now submitting doesn't do anything we will add to the database in time</p>
+                    </div>
                 </form>
             </div>
         </div>
