@@ -1,4 +1,10 @@
 <?php
+/**
+ * AUTHORS: Everett, Pedro, Nathan
+ * FILE: dataCommands.php
+ * PURPOSE: This script connects to the database and retrieves data from the `Pets` table.
+ * It then displays the name, age, breed, gender, personality, price, and image of each pet.
+ */
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';

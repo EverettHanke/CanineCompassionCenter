@@ -1,6 +1,9 @@
 <?php
 /*
  * AUTHORS: Everett, Pedro, Nathan
+ * FILE: index.php
+ * PURPOSE: This is the main entry point for the Dog Adoption Center webpage.
+ * It sets up routing for various pages using the Fat-Free Framework (F3).
  */
 
 //turn on error reporting

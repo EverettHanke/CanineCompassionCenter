@@ -1,19 +1,37 @@
 <?php
-
+/**
+ * Class Controller
+ * AUTHORS: Everett, Pedro, Nathan
+ * FILE: controller.php
+ * PURPOSE: This class handles the routing and business logic for the Dog Adoption Center application.
+ */
 class Controller
 {
     private $_f3; //Fat-Free Router
 
+    /**
+     * Controller constructor.
+     *
+     * @param $f3 The Fat-Free Framework instance.
+     */
     function __construct($f3)
     {
         $this->_f3 = $f3;
     }
+
+    /**
+     * Render the home page.
+     */
     function home()
     {
         //Render a view page
         $view = new Template();
         echo $view->render('views/home.html');
     }
+
+    /**
+     * Render the Our Dogs page and handle filtering and displaying dog data.
+     */
     function ourDogs()
     {
         // DB connection
@@ -66,6 +84,10 @@ class Controller
         $view = new Template();
         echo $view->render('views/ourDogs.html');
     }
+
+    /**
+     * Render the login page and handle login logic.
+     */
     function login()
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST")
@@ -77,6 +99,10 @@ class Controller
         echo $view->render('views/login.html');
     }
 
+
+    /**
+     * Render the sign-up page and handle sign-up logic.
+     */
     function signUp()
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST")
@@ -135,6 +161,9 @@ class Controller
         echo $view->render('views/signUp.html');
     }
 
+    /**
+     * Render the schedule page and display the selected dog's details.
+     */
     function schedule()
     {
         // DB connection
@@ -162,9 +191,8 @@ class Controller
     }
 
     /**
-     * This is used for the admin page, displays the data in the DB and offers a way to add a dog to the DB.
-     *
-     * */
+     * Render the admin page and handle adding new dogs to the database.
+     */
     function admin()
     {
 
