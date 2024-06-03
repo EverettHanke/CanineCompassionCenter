@@ -36,17 +36,20 @@
                 <form method="POST" action="#">
                     <button type="submit">Confirm Filter Changes</button>
                     <!-- FILTER GROUP FOR BREED BELOW -->
+                    <h3>Breed</h3>
                     <repeat group="{{ @breed }}" value="{{ @breedValue }}">
                         <label><input type="checkbox" name="breed[]" value="{{ @breedValue }}"> {{ ucfirst(@breedValue) }} </label><br>
                     </repeat>
                     <div class="col-12 divider"></div>
                     <!-- FILTER GROUP FOR PERSONALITY BELOW -->
+                    <h3>Personality</h3>
                     <repeat group="{{ @personality }}" value="{{ @personalityValue }}">
                         <label><input type="checkbox" name="personality[]" value="{{ @personalityValue }}"> {{ ucfirst(@personalityValue) }} </label><br>
                     </repeat>
                     <div class="col-12 divider"></div>
 
                     <!-- FILTER GROUP FOR AGE GROUP BELOW -->
+                    <h3>Age</h3>
                     <repeat group="{{ @age }}" value="{{ @ageValue }}">
                         <label><input type="checkbox" name="age[]" value="{{ @ageValue }}"> {{ ucfirst(@ageValue) }} </label><br>
                     </repeat>
