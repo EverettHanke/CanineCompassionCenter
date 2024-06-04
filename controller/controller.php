@@ -168,24 +168,37 @@ class Controller
                 } catch (PDOException $e) {
                     die($e->getMessage());
                 }
-                // define query
-                $sql = 'INSERT INTO CanineUsers (UserName,Email,PhoneNumber,Password,Admin)
-                    VALUES (:UserName, :Email,:PhoneNumber ,:Password, :Admin)';
-                // prepare query
+                //CHECK TO SEE IF A USER OF THIS EMAIL ALREADY EXISTS
+                $sql = 'SELECT * FROM CanineUsers WHERE Email = "' .$email . '"';
                 $statement = $dbh->prepare($sql);
-                // binding data
-                $statement->bindParam(':UserName', $userName);
-                $statement->bindParam(':Email', $email);
-                $statement->bindParam(':PhoneNumber', $phone);
-                $statement->bindParam(':Password', $password);
-                $statement->bindParam(':Admin', $admin);
-                // Execute the query
-                if ($statement->execute()) {
-                    echo "<p>User $userName was inserted successfully!</p>";
-                } else {
-                    $errorInfo = $statement->errorInfo();
-                    echo "<p>Error inserting User $userName. Error: " . $errorInfo[2] . "</p>";
+                $statement->execute();
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                if(empty($result))
+                {
+                    // define query
+                    $sql = 'INSERT INTO CanineUsers (UserName,Email,PhoneNumber,Password,Admin)
+                    VALUES (:UserName, :Email,:PhoneNumber ,:Password, :Admin)';
+                    // prepare query
+                    $statement = $dbh->prepare($sql);
+                    // binding data
+                    $statement->bindParam(':UserName', $userName);
+                    $statement->bindParam(':Email', $email);
+                    $statement->bindParam(':PhoneNumber', $phone);
+                    $statement->bindParam(':Password', $password);
+                    $statement->bindParam(':Admin', $admin);
+                    // Execute the query
+                    if ($statement->execute()) {
+                        echo "<p>User $userName was inserted successfully!</p>";
+                    } else {
+                        $errorInfo = $statement->errorInfo();
+                        echo "<p>Error inserting User $userName. Error: " . $errorInfo[2] . "</p>";
+                    }
                 }
+                else
+                {
+                    $this->_f3->set('errors["userEmail"]', 'Email of user already exists.');
+                }
+
             } // End of Server request_method = post
 
         $view = new Template();
