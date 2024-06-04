@@ -114,6 +114,7 @@ class Controller
             $password = "";
             $email = "";
             $phone = "";
+            $admin = 0;
             if ($this->_validator->validateUserName($_POST['userName']))
             {
                 $userName = $_POST['userName'];
@@ -158,10 +159,39 @@ class Controller
 
                 //test var_dump for now
                 var_dump($userName, $password, $email, $phone);
-            }
-        }
+
+                // DB connection
+                $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
+                require_once $path;
+                try {
+                    $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+                } catch (PDOException $e) {
+                    die($e->getMessage());
+                }
+                // define query
+                $sql = 'INSERT INTO CanineUsers (UserName,Email,PhoneNumber,Password,Admin)
+                    VALUES (:UserName, :Email,:PhoneNumber ,:Password, :Admin)';
+                // prepare query
+                $statement = $dbh->prepare($sql);
+                // binding data
+                $statement->bindParam(':UserName', $userName);
+                $statement->bindParam(':Email', $email);
+                $statement->bindParam(':PhoneNumber', $phone);
+                $statement->bindParam(':Password', $password);
+                $statement->bindParam(':Admin', $admin);
+                // Execute the query
+                if ($statement->execute()) {
+                    echo "<p>User $userName was inserted successfully!</p>";
+                } else {
+                    $errorInfo = $statement->errorInfo();
+                    echo "<p>Error inserting User $userName. Error: " . $errorInfo[2] . "</p>";
+                }
+            } // End of Server request_method = post
+
         $view = new Template();
         echo $view->render('views/signUp.html');
+        }
+
     }
 
     /**
