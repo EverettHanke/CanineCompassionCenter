@@ -18,7 +18,7 @@ require_once ('vendor/autoload.php');
 $f3 = Base::instance();
 
 //Instantiate Controller
-$con = new Controller($f3);
+$con = new Controller($f3, new Validators());
 
 //Reroute to home Page @BASE
 $f3->route('GET|POST /', function (){

@@ -8,15 +8,17 @@
 class Controller
 {
     private $_f3; //Fat-Free Router
+    private $_validator;
 
     /**
      * Controller constructor.
      *
      * @param $f3 The Fat-Free Framework instance.
      */
-    function __construct($f3)
+    function __construct($f3, $validator)
     {
         $this->_f3 = $f3;
+        $this->_validator = $validator;
     }
 
     /**
@@ -107,11 +109,12 @@ class Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
+            //$validator = new Validators();
             $userName = "";
             $password = "";
             $email = "";
             $phone = "";
-            if (validateUserName($_POST['userName']))
+            if ($this->_validator->validateUserName($_POST['userName']))
             {
                 $userName = $_POST['userName'];
             }
@@ -119,7 +122,7 @@ class Controller
             {
                 $this->_f3->set('errors["userName"]', 'Please enter at valid username with no numbers');
             }
-            if (validateEmail($_POST['userEmail']))
+            if ($this->_validator->validateEmail($_POST['userEmail']))
             {
                 $email = $_POST['userEmail'];
             }
@@ -127,7 +130,7 @@ class Controller
             {
                 $this->_f3->set('errors["userEmail"]', 'Please enter a valid email');
             }
-            if (validatePhone($_POST['phoneNum']))
+            if ($this->_validator->validatePhone($_POST['phoneNum']))
             {
                 $phone = $_POST['phoneNum'];
             }
@@ -135,7 +138,7 @@ class Controller
             {
                 $this->_f3->set('errors["phoneNum"]', 'Please enter at valid phone number');
             }
-            if (validatePassword($_POST['password'],$_POST['confirmPassword']))
+            if ($this->_validator->validatePassword($_POST['password'],$_POST['confirmPassword']))
             {
                 $password = $_POST['password'];
             }
