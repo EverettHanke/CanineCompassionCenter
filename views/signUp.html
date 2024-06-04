@@ -46,22 +46,37 @@
                         <div class="form-group">
                             <label for="userName">UserName:</label>
                             <input type="text" class="form-control" id="userName" name="userName">
+                            <check if="{{ isset(@errors['userName']) }}">
+                                <span class="error">{{ @errors['userName'] }}</span>
+                            </check>
                         </div>
                         <div class="form-group">
                             <label for="userEmail">Email:</label>
                             <input type="email" class="form-control" id="userEmail" name="userEmail">
+                            <check if="{{ isset(@errors['userEmail']) }}">
+                                <span class="error">{{ @errors['userEmail'] }}</span>
+                            </check>
                         </div>
                         <div class="form-group">
                             <label for="phoneNum">Phone Number:</label>
                             <input type="text" class="form-control" id="phoneNum" name="phoneNum">
+                            <check if="{{ isset(@errors['phoneNum']) }}">
+                                <span class="error">{{ @errors['phoneNum'] }}</span>
+                            </check>
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
                             <input type="text" class="form-control" id="password" name="password">
+                            <check if="{{ isset(@errors['password']) }}">
+                                <span class="error">{{ @errors['password'] }}</span>
+                            </check>
                         </div>
                         <div class="form-group">
                             <label for="confirmPassword">Confirm Password:</label>
                             <input type="text" class="form-control" id="confirmPassword" name="confirmPassword">
+                            <check if="{{ isset(@errors['password']) }}">
+                                <span class="error">{{ @errors['password'] }}</span>
+                            </check>
                         </div>
                         <div class="centerContent">
                             <button type="submit" class="btn btn-primary centerContent">Submit</button>
