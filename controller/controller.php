@@ -109,11 +109,17 @@ class Controller
             }
             if (empty($userPassword))
             {
-                $this->_f3->set('errors["password"]', 'Please enter a email');
+                $this->_f3->set('errors["password"]', 'Please enter a password');
             }
             if ($this->_validator->validateLogin($userName, $userEmail, $userPassword))
             {
                 $this->_f3->reroute("admin");
+            }
+            else if(!empty($userName) && !empty($userPassword))
+            {
+                $this->_f3->set('errors["password"]', 'Be sure to use the right email/password');
+                $this->_f3->set('errors["email"]', 'Be sure to use the right email/password');
+
             }
         }
         $view = new Template();
