@@ -94,9 +94,15 @@ class Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
-            var_dump($_POST);
 
-            $this->_f3->reroute("admin");
+            $userName = $_POST['userName'];
+            $userEmail = $_POST['userEmail'];
+            $userPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            //var_dump($userPassword . $userEmail . $userName);
+            if ($this->_validator->validateLogin($userName,"    ", $userEmail,"    ", $userPassword))
+            {
+                $this->_f3->reroute("admin");
+            }
         }
         $view = new Template();
         echo $view->render('views/login.html');
@@ -141,7 +147,7 @@ class Controller
             }
             if ($this->_validator->validatePassword($_POST['password'],$_POST['confirmPassword']))
             {
-                $password = password_hash($_POST['password'], PASSWORD_ARGON2I);
+                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             }
             else
             {
