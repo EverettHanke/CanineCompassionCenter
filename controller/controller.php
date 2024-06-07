@@ -140,7 +140,7 @@ class Controller
             }
             if ($this->_validator->validatePassword($_POST['password'],$_POST['confirmPassword']))
             {
-                $password = $_POST['password'];
+                $password = password_hash($_POST['password'], PASSWORD_ARGON2I);
             }
             else
             {
@@ -148,9 +148,6 @@ class Controller
             }
             if (empty($this->_f3->get('errors')))
             {
-                //test var_dump for now
-                var_dump($userName, $password, $email, $phone);
-
                 // DB connection
                 $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
                 require_once $path;
