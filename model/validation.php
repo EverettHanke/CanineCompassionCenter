@@ -54,24 +54,29 @@ class Validators
 
     function validateLogin($userName, $email, $password)
     {
+
         // DB connection
         $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
         require_once $path;
         try {
             $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            //echo "<h1>CONNECTED</h1>";
         } catch (PDOException $e) {
             die($e->getMessage());
         }
 
-        $sql = "SELECT * FROM CanineUsers WHERE UserName = :userName AND Email = :email AND Password = :password";
+        $sql = "SELECT * FROM CanineUsers WHERE UserName = :userName AND Email = :email";
         $statement = $dbh->prepare($sql);
         $statement->bindParam(':userName', $userName);
         $statement->bindParam(':email', $email);
-        $statement->bindParam(':password', $password);
-        var_dump($statement);
+
         $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($result);
-        return (!empty($result));
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result && password_verify($password, $result['Password'])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

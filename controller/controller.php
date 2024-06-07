@@ -97,9 +97,21 @@ class Controller
 
             $userName = $_POST['userName'];
             $userEmail = $_POST['userEmail'];
-            $userPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            //var_dump($userPassword . $userEmail . $userName);
-            if ($this->_validator->validateLogin($userName,"    ", $userEmail,"    ", $userPassword))
+            $userPassword = $_POST['password'];
+
+            if(!$this->_validator->validateUserName($userName))
+            {
+                $this->_f3->set('errors["name"]', 'Please enter a UserName');
+            }
+            if(!$this->_validator->validateEmail($userEmail))
+            {
+                $this->_f3->set('errors["email"]', 'Please enter a email');
+            }
+            if (empty($userPassword))
+            {
+                $this->_f3->set('errors["password"]', 'Please enter a email');
+            }
+            if ($this->_validator->validateLogin($userName, $userEmail, $userPassword))
             {
                 $this->_f3->reroute("admin");
             }
