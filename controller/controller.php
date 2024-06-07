@@ -95,6 +95,7 @@ class Controller
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
             var_dump($_POST);
+
             $this->_f3->reroute("admin");
         }
         $view = new Template();
