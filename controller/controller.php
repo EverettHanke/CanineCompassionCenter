@@ -109,7 +109,6 @@ class Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
-            //$validator = new Validators();
             $userName = "";
             $password = "";
             $email = "";
@@ -149,14 +148,6 @@ class Controller
             }
             if (empty($this->_f3->get('errors')))
             {
-                //create profile object
-
-                //pass profile over to data base
-
-                //if user send them back to home page
-
-                //if admin send them onto admin screen
-
                 //test var_dump for now
                 var_dump($userName, $password, $email, $phone);
 
@@ -187,9 +178,12 @@ class Controller
                     $statement->bindParam(':Password', $password);
                     $statement->bindParam(':Admin', $admin);
                     // Execute the query
-                    if ($statement->execute()) {
+                    if ($statement->execute())
+                    {
                         echo "<p>User $userName was inserted successfully!</p>";
-                    } else {
+                    }
+                    else
+                    {
                         $errorInfo = $statement->errorInfo();
                         echo "<p>Error inserting User $userName. Error: " . $errorInfo[2] . "</p>";
                     }
@@ -199,12 +193,10 @@ class Controller
                     $this->_f3->set('errors["userEmail"]', 'Email of user already exists.');
                 }
 
-            } // End of Server request_method = post
-
+            }
+        } // End of Server request_method = post
         $view = new Template();
         echo $view->render('views/signUp.html');
-        }
-
     }
 
     /**
