@@ -53,7 +53,6 @@
 }
 
 .aboutUs {
-    padding-top: 50px;
     padding-bottom: 50px;
 }
 
@@ -62,6 +61,18 @@
 }
 
 .aboutUs .row {
+    align-items: center;
+}
+
+.dogInformation{
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+}
+.dogInformation h1 {
+    margin-bottom: 20px;
+}
+.dogInformation .row {
     align-items: center;
 }
 
@@ -80,7 +91,6 @@
 
 .aboutUs .col-md-6 {
     border-right: 2px solid black;
-    padding: 0 20px;
 }
 
 .box {
@@ -178,4 +188,20 @@ th
 /* Hidden section */
 .hidden-section {
     display: none;
+}
+
+
+.scheduleConfirmation {
+    margin: auto;
+    width: 100%;
+    border: 10px black;
+    padding: 10px;
+}
+
+.thank-you-message {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    border-radius: 10px;
 }

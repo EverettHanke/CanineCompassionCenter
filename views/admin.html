@@ -139,7 +139,7 @@
 
             <div id="dogFormSection" class="col-md-5 vertical-divider" >
                 <!--Dog Form-->
-                <form method="POST" action="#" enctype="multipart/form-data">
+                <form id="dogForm" method="POST" action="#" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="dogName">Dogs Name:</label>
                         <input type="text" class="form-control" id="dogName" name="dogName">
@@ -190,6 +190,10 @@
                         <p class="centerContent">Be sure to see that all data is correct before submitting</p>
                     </div>
                 </form>
+                <div id="thankYouMessageAdmin" class="thank-you-message" style="display:none;">
+                    <h2>Thank you for submitting!</h2>
+                    <p>The dog information has been successfully added.</p>
+                </div>
             </div>
 
         </div>
