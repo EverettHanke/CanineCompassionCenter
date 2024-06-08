@@ -234,7 +234,6 @@ class Controller
         } catch (PDOException $e) {
             die($e->getMessage());
         }
-        var_dump($_SESSION);
         //Call request
         $sql = "SELECT * FROM Pets WHERE PetID = :PetID";
         $stmt = $dbh->prepare($sql);
@@ -261,7 +260,7 @@ class Controller
 
             // Execute the query
             if ($statement->execute()) {
-                echo "<p>Thanks $name for scheduling an appointment with $id</p>";
+               /* echo "<p>Thanks $name for scheduling an appointment with $id</p>";*/
             } else {
                 $errorInfo = $statement->errorInfo();
                 echo "<p>Error inserting appointment with $name. Error: " . $errorInfo[2] . "</p>";
@@ -297,8 +296,8 @@ class Controller
 
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
-            var_dump($_POST);
-            var_dump($_FILES);
+            /*var_dump($_POST);
+            var_dump($_FILES);*/
 
             /*//Potentially grab this and upload it to userImages later once we have dbConnect set up??
                 $file_name = $_FILES['image']['name'];
@@ -325,7 +324,7 @@ class Controller
                 $file_path = $folder . $file_name;
 
                 if (move_uploaded_file($tempName, $file_path)) {
-                    echo "<h1>SUCCESS</h1>";
+                    /*echo "<h1>SUCCESS</h1>";*/
                 } else {
                     echo "<p>Failed to move uploaded file.</p>";
                 }
@@ -348,7 +347,7 @@ class Controller
             $statement->bindParam(':Image', $file_path);
             // Execute the query
             if ($statement->execute()) {
-                echo "<p>Dog $Name was inserted successfully!</p>";
+/*                echo "<p>Dog $Name was inserted successfully!</p>";*/
             } else {
                 $errorInfo = $statement->errorInfo();
                 echo "<p>Error inserting dog $Name. Error: " . $errorInfo[2] . "</p>";

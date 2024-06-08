@@ -174,3 +174,8 @@ th
 {
     color: darkred;
 }
+
+/* Hidden section */
+.hidden-section {
+    display: none;
+}
