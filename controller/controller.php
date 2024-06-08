@@ -241,8 +241,36 @@ class Controller
         $id = $this->_f3->get('SESSION.scheduleDogID');
         $stmt->bindParam(':PetID', $id, PDO::PARAM_INT);
         $stmt->execute();
+        if ($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $phoneNumber = $_POST['phoneNum'];
+            $date = $_POST['date'];
 
-        //Create Dog object based on results
+            $sql = 'INSERT INTO Appointments (Name,Email,PhoneNumber,Date,PetID)
+                    VALUES (:Name, :Email, :PhoneNumber, :Date, :Id)';
+            // prepare query
+            $statement = $dbh->prepare($sql);
+            // binding data
+            $statement->bindParam(':Name', $name);
+            $statement->bindParam(':Email', $email);
+            $statement->bindParam(':PhoneNumber', $phoneNumber);
+            $statement->bindParam(':Date', $date);
+            $statement->bindParam(':Id', $id);
+
+            // Execute the query
+            if ($statement->execute()) {
+                echo "<p>Thanks $name for scheduling an appointment with $id</p>";
+            } else {
+                $errorInfo = $statement->errorInfo();
+                echo "<p>Error inserting appointment with $name. Error: " . $errorInfo[2] . "</p>";
+            }
+
+
+
+        }
+            //Create Dog object based on results
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $scheduleDog = new Dogs($result['PetID'], $result['Name'], $result['Age'], $result['Breed'], $result['Gender'], $result['Personality'], $result['Price'], $result['Image']);
         $this->_f3->set('scheduleDog', $scheduleDog);
@@ -337,6 +365,30 @@ class Controller
         // process the result in the html form
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         $this->_f3->set('dbDogs', $result);
+
+        // define the query
+        $sql = "SELECT Appointments.*, Pets.Name AS PetName FROM Appointments
+            JOIN Pets ON Appointments.PetID = Pets.PetID
+            ORDER BY `AppointmentID` ASC";
+        // prepare the statement
+        $statement = $dbh->prepare($sql);
+        // execute the statement
+        $statement->execute();
+        // process the result in the html form
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $this->_f3->set('dbAppointment', $result);
+
+
+        // define the query
+        $sql = "SELECT ID, UserName, Email, PhoneNumber, Admin FROM CanineUsers";
+        // prepare the statement
+        $statement = $dbh->prepare($sql);
+        // execute the statement
+        $statement->execute();
+        // process the result in the html form
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $this->_f3->set('dbUsers', $result);
+
         /*NTR 5/23 Doing DB connectivity to see realtime DB data END*/
 
         // providing data to offer for html form

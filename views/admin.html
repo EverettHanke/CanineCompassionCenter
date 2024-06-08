@@ -6,7 +6,9 @@
 -->
 <include href="views/header.html"></include>
 <body>
+
 <div class="container">
+
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <!--Add company Logo Later -->
@@ -40,71 +42,103 @@
     <div class="col-12 centerContent">
         <img src="images/LogoPng.png" class="logo-image" alt="Company Logo">
         <h1>ADMIN PAGE</h1>
+        <div class="button-group">
+            <button id="dogsBtn" onclick="showSection('dogs')">List of Dogs</button>
+            <button id="appointmentsBtn" onclick="showSection('appointments')">List of Appointments</button>
+            <button id="usersBtn" onclick="showSection('users')">List of Users</button>
+        </div>
     </div>
-
-    <!-- Start of page after navbar -->
 
     <!-- Horizontal line -->
     <hr class="divider">
 
     <div class="container">
         <div class="row">
-            <div class="col-md-7 dogDB">
-                <!--<div class="centerContent">
-                    <h3>Dog DataBase</h3>
-                    <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>Breed</th>
-                            <th>Personality</th>
-                            <th>Gender</th>
-                            <th>Age</th>
-                            <th>Price</th>
-                        </tr>
-                        <repeat group="{{ @dogDataBase }}" value="{{ @dogDataBaseValue }}">
-                            <tr>
-                                <td>{{ @dogDataBaseValue->getName() }}</td>
-                                <td>{{ @dogDataBaseValue->getBreed() }}</td>
-                                <td>{{ implode(", ", @dogDataBaseValue->getPersonality()) }}</td>
-                                <td>{{ @dogDataBaseValue->getGender() }}</td>
-                                <td>{{ @dogDataBaseValue->getAge() }}</td>
-                                <td>{{ @dogDataBaseValue->getPrice() }}</td>
-                            </tr>
-                        </repeat>
-                    </table>
-                </div>-->
-                <!--NTR Testing DB Connection, this table will reflect our DB in myPHPAd-->
+            <div id="contentSection" class="col-md-7 dogDB">
                 <div class="row">
                     <div class="centerContent">
+
+                        <div id="dogsSection" class="section">
                         <h3>Dog DataBase</h3>
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Pet ID</th>
-                                <th>Name</th>
-                                <th>Breed</th>
-                                <th>Personality</th>
-                                <th>Gender</th>
-                                <th>Age</th>
-                                <th>Price</th>
-                            </tr>
-                            <repeat group="{{ @dbDogs }}" value="{{ @dog }}">
+                            <table class="table table-striped">
                                 <tr>
-                                    <td>{{ @dog['PetID'] }}</td>
-                                    <td>{{ @dog['Name'] }}</td>
-                                    <td>{{ @dog['Breed'] }}</td>
-                                    <td>{{ @dog['Personality'] }}</td>
-                                    <td>{{ @dog['Gender'] }}</td>
-                                    <td>{{ @dog['Age'] }}</td>
-                                    <td>{{ @dog['Price'] }}</td>
+                                    <th>Pet ID</th>
+                                    <th>Name</th>
+                                    <th>Breed</th>
+                                    <th>Personality</th>
+                                    <th>Gender</th>
+                                    <th>Age</th>
+                                    <th>Price</th>
                                 </tr>
-                            </repeat>
-                        </table>
+                                <repeat group="{{ @dbDogs }}" value="{{ @dog }}">
+                                    <tr>
+                                        <td>{{ @dog['PetID'] }}</td>
+                                        <td>{{ @dog['Name'] }}</td>
+                                        <td>{{ @dog['Breed'] }}</td>
+                                        <td>{{ @dog['Personality'] }}</td>
+                                        <td>{{ @dog['Gender'] }}</td>
+                                        <td>{{ @dog['Age'] }}</td>
+                                        <td>{{ @dog['Price'] }}</td>
+                                    </tr>
+                                </repeat>
+                            </table>
+                        </div>
+
+                        <div id="appointmentsSection" class="section" style="display: none;">
+                            <h3>Appointment DataBase</h3>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Appointment ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Date</th>
+                                    <th>Dog ID</th>
+                                    <th>Dog Name</th>
+                                </tr>
+                                <repeat group="{{ @dbAppointment }}" value="{{ @appointment }}">
+                                    <tr>
+                                        <td>{{ @appointment['AppointmentID'] }}</td>
+                                        <td>{{ @appointment['Name'] }}</td>
+                                        <td>{{ @appointment['Email'] }}</td>
+                                        <td>{{ @appointment['PhoneNumber'] }}</td>
+                                        <td>{{ @appointment['Date'] }}</td>
+                                        <td>{{ @appointment['PetID'] }}</td>
+                                        <td>{{ @appointment['PetName'] }}</td>
+                                    </tr>
+                                </repeat>
+                            </table>
+                        </div>
+
+                        <div id="usersSection" class="section" style="display: none;">
+                            <h3>User DataBase</h3>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>UserName</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Is Admin</th>
+                                    <th>Make Admin</th>
+                                </tr>
+                                <repeat group="{{ @dbUsers }}" value="{{ @user }}">
+                                    <tr>
+                                        <td>{{ @user['ID'] }}</td>
+                                        <td>{{ @user['UserName'] }}</td>
+                                        <td>{{ @user['Email'] }}</td>
+                                        <td>{{ @user['PhoneNumber'] }}</td>
+                                        <td>{{ @user['Admin'] }}</td>
+                                        <td></td>
+                                    </tr>
+                                </repeat>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <!--NTR Testing DB Connection, this table will reflect our DB in myPHPAd END-->
             </div>
-            <div class="col-md-5 vertical-divider">
-                <!-- Add dog to our data base -->
+
+            <div id="dogFormSection" class="col-md-5 vertical-divider" >
+                <!--Dog Form-->
                 <form method="POST" action="#" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="dogName">Dogs Name:</label>
@@ -158,6 +192,7 @@
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 
