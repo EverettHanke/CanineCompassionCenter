@@ -140,6 +140,7 @@
             <div id="dogFormSection" class="col-md-5 vertical-divider" >
                 <!--Dog Form-->
                 <form id="dogForm" method="POST" action="#" enctype="multipart/form-data">
+                    <h3>New Dog Listing Form</h3>
                     <div class="form-group">
                         <label for="dogName">Dogs Name:</label>
                         <input type="text" class="form-control" id="dogName" name="dogName">
@@ -183,11 +184,14 @@
                         <label for="dogProfile">Upload Dog Picture:</label>
                         <input class="dogProfile" type="file" name="dogProfile" id="dogProfile" accept="image/png, image/gif, image/jpeg">
                     </div>
+                    <div class="form-group">
+                        <img id="imagePreview" src="#" alt="Image Preview" style="display: none; width: 100%; max-width: 200px; margin-top: 10px;">
+                    </div>
                     <div class="centerContent mt-5">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     <div class="content mt-5">
-                        <p class="centerContent">Be sure to see that all data is correct before submitting</p>
+                        <p class="centerContent">Be sure to see that all data is correct before submitting!</p>
                     </div>
                 </form>
                 <div id="thankYouMessageAdmin" class="thank-you-message" style="display:none;">
@@ -204,6 +208,6 @@
 <!-- Bootstrap JS and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
+<script src="JS/tableDisplay.js"></script>
 </body>
 </html>

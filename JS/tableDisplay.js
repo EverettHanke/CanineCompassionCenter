@@ -3,6 +3,17 @@
  * FILE: tableDisplay.js
  * PURPOSE: Helps display the selected tables in admin.html
  */
+
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function(){
+        const output = document.getElementById('imagePreview');
+        output.src = reader.result;
+        output.style.display = 'block';
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Show sections based on button clicks
     document.getElementById('dogsBtn').addEventListener('click', function () {
@@ -30,7 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Use JavaScript to submit the form after showing the thank you message
         setTimeout(() => {
             dogForm.submit();
-        }, 1500); // Delay the form submission by 500ms to show the thank you message
+        }, 2000); // Delay the form submission by 500ms to show the thank you message
+    });
+
+    // Handle image preview
+    const dogProfileInput = document.getElementById('dogProfile');
+    dogProfileInput.addEventListener('change', function (event) {
+        previewImage(event);
     });
 });
 
@@ -58,3 +75,4 @@ function showSection(section) {
         document.getElementById('usersSection').style.display = 'block';
     }
 }
+

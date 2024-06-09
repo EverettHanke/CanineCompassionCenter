@@ -204,9 +204,18 @@ th
     border: 1px solid #ccc;
     background-color: #f8f8f8;
     border-radius: 10px;
+    display: none;
 }
 
 .body-color
 {
     background-color: rgba(94, 231, 199, 0.93)
 }
+
+#imagePreview {
+    display: none;
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+}
+
