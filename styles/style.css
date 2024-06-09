@@ -205,3 +205,8 @@ th
     background-color: #f8f8f8;
     border-radius: 10px;
 }
+
+.body-color
+{
+    background-color: rgba(94, 231, 199, 0.93)
+}
