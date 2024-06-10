@@ -45,42 +45,58 @@ class Controller
             die($e->getMessage());
         }
 
-        //POST will be when we filter and refilter for certain Dogs
-        if ($_SERVER['REQUEST_METHOD'] == "POST")
-        {
-
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->_f3->set('SESSION.scheduleDogID', $_POST['id']);
-            var_dump($_SESSION);
-
-
-            //stmt for getting dog of equal id
-            //set the data we get to the constructor of a dog object in session
-            //and we will re route to schedule
-            $this->_f3->reroute("schedule");
-
+            $this->_f3->reroute('schedule');
         }
-        $dogDataBase = array();
-        //Get the dog cards ready
-        $sql = 'SELECT * FROM Pets ORDER BY PetID ASC ';
+
+        $conditions = [];
+        $params = [];
+
+        // Handle breed filter
+        if (!empty($_GET['breed'])) {
+            $breeds = implode(',', array_fill(0, count($_GET['breed']), '?'));
+            $conditions[] = "Breed IN ($breeds)";
+            $params = array_merge($params, $_GET['breed']);
+        }
+
+        // Handle personality filter
+        if (!empty($_GET['personality'])) {
+            $personalities = implode(',', array_fill(0, count($_GET['personality']), '?'));
+            $conditions[] = "Personality IN ($personalities)";
+            $params = array_merge($params, $_GET['personality']);
+        }
+
+        // Handle age filter
+        if (!empty($_GET['age'])) {
+            $ages = implode(',', array_fill(0, count($_GET['age']), '?'));
+            $conditions[] = "Age IN ($ages)";
+            $params = array_merge($params, $_GET['age']);
+        }
+
+        $sql = 'SELECT * FROM Pets';
+        if (!empty($conditions)) {
+            $sql .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+        $sql .= ' ORDER BY PetID ASC';
+
         $stmt = $dbh->prepare($sql);
-        $stmt->execute();
-
+        $stmt->execute($params);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $row)
-        {
-            array_push($dogDataBase, new Dogs($row['PetID'], $row['Name'], $row['Age'], $row['Breed'], $row['Gender'], $row['Personality'], $row['Price'], $row['Image']));
+
+        $dogDataBase = [];
+        foreach ($result as $row) {
+            $dogDataBase[] = new Dogs($row['PetID'], $row['Name'], $row['Age'], $row['Breed'], $row['Gender'], $row['Personality'], $row['Price'], $row['Image']);
         }
-        //Populate Cards
+
+        // Populate Cards
         $this->_f3->set('dogDataBase', $dogDataBase);
 
-
-        //set breed below
+        // Set filter options
         $breed = DataLayers::getFilterBreeds();
         $this->_f3->set('breed', $breed);
-        //set personality below
         $personality = DataLayers::getFilterPersonality();
         $this->_f3->set('personality', $personality);
-        //set age group below
         $age = DataLayers::getFilterAge();
         $this->_f3->set('age', $age);
         $view = new Template();
