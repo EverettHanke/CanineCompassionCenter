@@ -55,5 +55,10 @@ $f3->route('GET|POST /admin', function ()
     $GLOBALS['con']->admin();
 });
 
+// Route for updating admin status
+$f3->route('POST /updateAdminStatus', function () {
+    $GLOBALS['con']->updateAdminStatus();
+});
+
 //run Fat Free
 $f3->run();

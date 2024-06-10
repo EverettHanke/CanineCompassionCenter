@@ -126,7 +126,6 @@ class Controller
         echo $view->render('views/login.html');
     }
 
-
     /**
      * Render the sign-up page and handle sign-up logic.
      */
@@ -403,4 +402,35 @@ class Controller
         $view = new Template();
         echo $view->render('views/admin.html');
     }
+
+    /**
+     * Alter a users status with checkbox button and reflects it in the database.
+     */
+    function updateAdminStatus() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
+            require_once $path;
+            try {
+                $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+
+            $userId = $_POST['userId'];
+            $isAdmin = $_POST['isAdmin'];
+
+            // Update admin status in the database
+            $sql = 'UPDATE CanineUsers SET Admin = :isAdmin WHERE ID = :userId';
+            $statement = $dbh->prepare($sql);
+            $statement->bindParam(':isAdmin', $isAdmin, PDO::PARAM_INT);
+            $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+
+            if ($statement->execute()) {
+                echo 'Admin status updated successfully';
+            } else {
+                echo 'NOT WORKING';
+            }
+        }
+    }
+
 }

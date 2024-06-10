@@ -4,6 +4,11 @@
  * PURPOSE: Helps display the selected tables in admin.html
  */
 
+/**
+ * Displays the preview of the selected image.
+ *
+ * @param {Event} event - The event triggered when the image file is selected.
+ */
 function previewImage(event) {
     const reader = new FileReader();
     reader.onload = function(){
@@ -14,6 +19,9 @@ function previewImage(event) {
     reader.readAsDataURL(event.target.files[0]);
 }
 
+/**
+ * Initializes event listeners after the DOM content has been loaded.
+ */
 document.addEventListener('DOMContentLoaded', function () {
     // Show sections based on button clicks
     document.getElementById('dogsBtn').addEventListener('click', function () {
@@ -51,6 +59,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+/**
+ * Shows the specified section and hides all others.
+ *
+ * @param {string} section - The section to be displayed ('dogs', 'appointments', 'users').
+ */
 function showSection(section) {
     console.log(`Switching to section: ${section}`);
     // Hide all sections
@@ -75,4 +88,48 @@ function showSection(section) {
         document.getElementById('usersSection').style.display = 'block';
     }
 }
+
+/**
+ * Toggles the admin status and updates the display of the checkbox.
+ *
+ * @param {Element} element - The element that was clicked to trigger the toggle.
+ */
+function toggleAdmin(element) {
+    const td = element.closest('td');
+    const userId = td.getAttribute('data-id');
+    const checkedIcon = td.querySelector('.checked-icon');
+    const uncheckedIcon = td.querySelector('.unchecked-icon');
+    const isAdmin = checkedIcon.classList.contains('hidden') ? 1 : 0;
+
+    // Toggle display immediately
+    checkedIcon.classList.toggle('hidden');
+    checkedIcon.classList.toggle('visible');
+    uncheckedIcon.classList.toggle('hidden');
+    uncheckedIcon.classList.toggle('visible');
+
+    // Send AJAX request to update admin status
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/328/CanineCompassionCenter/updateAdminStatus', true); // Adjusted path
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            console.log(xhr.responseText);
+            // You can add additional logic here if needed for a successful response
+        } else if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.error('Error updating admin status');
+            // Revert the display if there was an error
+            checkedIcon.classList.toggle('hidden');
+            checkedIcon.classList.toggle('visible');
+            uncheckedIcon.classList.toggle('hidden');
+            uncheckedIcon.classList.toggle('visible');
+        }
+    };
+    xhr.send(`userId=${userId}&isAdmin=${isAdmin}`);
+}
+
+
+
+
+
+
 

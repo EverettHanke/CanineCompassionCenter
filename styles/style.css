@@ -219,3 +219,27 @@ th
     margin-top: 10px;
 }
 
+/* Styles for the SVG icons */
+.svg-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.checked-icon {
+    display: inline;
+}
+
+.unchecked-icon {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: inline;
+}
+
+
