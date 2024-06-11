@@ -344,27 +344,55 @@ class Controller
                 //$this->_f3->reroute("admin"); do not use but good working theory for refresh bug.
             }
 
-
-            // define query
-            $sql = 'INSERT INTO Pets (Name,Age,Breed,Gender,Personality,Price,Image)
-                    VALUES (:Name, :Age, :Breed, :Gender, :Personality, :Price, :Image)';
-            // prepare query
-            $statement = $dbh->prepare($sql);
-            // binding data
-            $statement->bindParam(':Name', $Name);
-            $statement->bindParam(':Age', $Age);
-            $statement->bindParam(':Breed', $Breed);
-            $statement->bindParam(':Gender', $Gender);
-            $statement->bindParam(':Personality', $Personality);
-            $statement->bindParam(':Price', $Price);
-            $statement->bindParam(':Image', $file_path);
-            // Execute the query
-            if ($statement->execute()) {
-/*                echo "<p>Dog $Name was inserted successfully!</p>";*/
-            } else {
-                $errorInfo = $statement->errorInfo();
-                echo "<p>Error inserting dog $Name. Error: " . $errorInfo[2] . "</p>";
+            if(!$this->_validator->validateDogName($Name))
+            {
+                $this->_f3->set('errors["dogName"]', 'Please enter a valid dog name');
             }
+            if(!$this->_validator->validateDogPrice($Price))
+            {
+                $this->_f3->set('errors["dogPrice"]', 'Please enter a valid dog name');
+            }
+            if(empty($this->_f3->get('errors')) && isset($_FILES['dogProfile']))
+            {
+                if (isset($_FILES['dogProfile']) && $_FILES['dogProfile']['error'] == 0) {
+                    $file_name = $_FILES['dogProfile']['name'];
+                    $tempName = $_FILES['dogProfile']['tmp_name'];
+                    $folder = 'userImages/'.$file_name;
+                    $file_path = $folder . $file_name;
+
+                    if (move_uploaded_file($tempName, $file_path)) {
+                        /*echo "<h1>SUCCESS</h1>";*/
+                    } else {
+                        echo "<p>Failed to move uploaded file.</p>";
+                    }
+                    //$this->_f3->reroute("admin"); do not use but good working theory for refresh bug.
+                }
+                // define query
+                $sql = 'INSERT INTO Pets (Name,Age,Breed,Gender,Personality,Price,Image)
+                    VALUES (:Name, :Age, :Breed, :Gender, :Personality, :Price, :Image)';
+                // prepare query
+                $statement = $dbh->prepare($sql);
+                // binding data
+                $statement->bindParam(':Name', $Name);
+                $statement->bindParam(':Age', $Age);
+                $statement->bindParam(':Breed', $Breed);
+                $statement->bindParam(':Gender', $Gender);
+                $statement->bindParam(':Personality', $Personality);
+                $statement->bindParam(':Price', $Price);
+                $statement->bindParam(':Image', $file_path);
+                // Execute the query
+                if ($statement->execute()) {
+                    /*                echo "<p>Dog $Name was inserted successfully!</p>";*/
+                } else {
+                    $errorInfo = $statement->errorInfo();
+                    echo "<p>Error inserting dog $Name. Error: " . $errorInfo[2] . "</p>";
+                }
+            }
+            else
+            {
+                $this->_f3->set('errors["dogProfile"]', 'Please enter a valid dog image');
+            }
+
         } // End of Server request_method = post
 
 

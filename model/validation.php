@@ -79,4 +79,12 @@ class Validators
             return false;
         }
     }
+    function validateDogName($name)
+    {
+        return ctype_alpha($name);
+    }
+    function validateDogPrice($price)
+    {
+        return ctype_alnum($price);
+    }
 }
