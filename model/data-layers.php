@@ -31,16 +31,6 @@ class DataLayers
     }
 
     /**
-     * Get a list of age groups for filtering.
-     *
-     * @return array An array of age groups.
-     */
-    static function getFilterAge()
-    {
-        return array('8 weeks - 6 months', '7 months - 1 year', '1 - 3 years', '4 - 7 years', ' 8 years+');
-    }
-
-    /**
      * Get a list of ages in years.
      * Used for admin.html form to insert a new dog in the database.
      *

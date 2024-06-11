@@ -35,33 +35,39 @@
         </div>
     </nav>
         <div class="row">
-            <div class="col-2 filterNav">
+            <div class="col-3 filterNav">
 
                 <form method="GET" action="ourDogs">
-                    <button class="mt-3" type="submit">Confirm Filter Changes</button>
+                    <button class="mt-3 ml-4" type="submit">Confirm Filter Changes</button>
                     <div class="col-12 divider"></div>
 
                     <!-- FILTER GROUP FOR BREED BELOW -->
-                    <h3>Breed</h3>
-                    <repeat group="{{ @breed }}" value="{{ @breedValue }}">
-                        <label><input type="checkbox" name="breed[]" value="{{ @breedValue }}"> {{ ucfirst(@breedValue) }} </label><br>
-                    </repeat>
+                    <div class="ml-4">
+                        <h3>Breed</h3>
+                        <repeat group="{{ @breed }}" value="{{ @breedValue }}">
+                            <label><input type="checkbox" name="breed[]" value="{{ @breedValue }}"> {{ ucfirst(@breedValue) }} </label><br>
+                        </repeat>
+                    </div>
                     <div class="col-12 divider"></div>
                     <!-- FILTER GROUP FOR PERSONALITY BELOW -->
-                    <h3>Personality</h3>
-                    <repeat group="{{ @personality }}" value="{{ @personalityValue }}">
-                        <label><input type="checkbox" name="personality[]" value="{{ @personalityValue }}"> {{ ucfirst(@personalityValue) }} </label><br>
-                    </repeat>
+                    <div class="ml-4">
+                        <h3>Personality</h3>
+                        <repeat group="{{ @personality }}" value="{{ @personalityValue }}">
+                            <label><input type="checkbox" name="personality[]" value="{{ @personalityValue }}"> {{ ucfirst(@personalityValue) }} </label><br>
+                        </repeat>
+                    </div>
                     <div class="col-12 divider"></div>
 
                     <!-- FILTER GROUP FOR AGE GROUP BELOW -->
-                    <h3>Age</h3>
-                    <repeat group="{{ @age }}" value="{{ @ageValue }}">
-                        <label><input type="checkbox" name="age[]" value="{{ @ageValue }}"> {{ ucfirst(@ageValue) }} </label><br>
-                    </repeat>
+                    <div class="ml-4">
+                        <h3>Age</h3>
+                        <label for="ageRange">Select Age Range:</label>
+                        <input type="range" id="ageRange" name="ageRange" min="0" max="15" step="1" value="0" oninput="updateAgeRangeLabel(this.value)">
+                        <span id="ageRangeLabel">0</span> years
+                    </div>
                 </form>
             </div>
-            <div class="col-10">
+            <div class="col-9">
                 <h5 class="mt-3">If one of our dogs interest you, it is recommended to schedule an appointment.</h5>
                 <form method="POST" action="#">
                     <div class="row mt-3"><!-- row inside other side of filter -->

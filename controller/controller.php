@@ -68,10 +68,10 @@ class Controller
         }
 
         // Handle age filter
-        if (!empty($_GET['age'])) {
-            $ages = implode(',', array_fill(0, count($_GET['age']), '?'));
-            $conditions[] = "Age IN ($ages)";
-            $params = array_merge($params, $_GET['age']);
+        if (!empty($_GET['ageRange'])) {
+            $age = $_GET['ageRange'];
+            $conditions[] = "Age <= ?";
+            $params[] = $age;
         }
 
         $sql = 'SELECT * FROM Pets';
@@ -97,8 +97,6 @@ class Controller
         $this->_f3->set('breed', $breed);
         $personality = DataLayers::getFilterPersonality();
         $this->_f3->set('personality', $personality);
-        $age = DataLayers::getFilterAge();
-        $this->_f3->set('age', $age);
         $view = new Template();
         echo $view->render('views/ourDogs.html');
     }
