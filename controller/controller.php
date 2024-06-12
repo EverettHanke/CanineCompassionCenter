@@ -13,7 +13,8 @@ class Controller
     /**
      * Controller constructor.
      *
-     * @param $f3 The Fat-Free Framework instance.
+     * @param $f3 Base Fat-Free Framework instance.
+     * @param Object validator
      */
     function __construct($f3, $validator)
     {
