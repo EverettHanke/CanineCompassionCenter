@@ -52,6 +52,13 @@ class Validators
         return $password1 == $password2;
     }
 
+    /**
+     * validateLogin
+     * @param $userName String userName
+     * @param $email String userEmail
+     * @param $password String userPassword
+     * @return bool|void on whether our login was valid
+     */
     function validateLogin($userName, $email, $password)
     {
 
@@ -79,12 +86,42 @@ class Validators
             return false;
         }
     }
+
+    /**
+     * validateDogName method
+     * @param $name String name of dog
+     * @return bool if our dogs name is valid
+     */
     function validateDogName($name)
     {
         return ctype_alpha($name);
     }
+
+    /**
+     * validateDogPrice method
+     * @param $price int price of dog
+     * @return bool if our dogs price is a valid int
+     */
     function validateDogPrice($price)
     {
         return ctype_alnum($price);
+    }
+
+    /**
+     * getDBH method allows us to retrieve dbh
+     * helps make our code dry
+     * @return PDO dbh
+     */
+    function getDBH()
+    {
+        // DB connection
+        $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
+        require_once $path;
+        try {
+            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            return $dbh;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
     }
 }

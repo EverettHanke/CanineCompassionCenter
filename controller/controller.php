@@ -187,13 +187,8 @@ class Controller
             if (empty($this->_f3->get('errors')))
             {
                 // DB connection
-                $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
-                require_once $path;
-                try {
-                    $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-                } catch (PDOException $e) {
-                    die($e->getMessage());
-                }
+                $dbh = $this->_validator->getDBH();
+
                 //CHECK TO SEE IF A USER OF THIS EMAIL ALREADY EXISTS
                 $sql = 'SELECT * FROM CanineUsers WHERE Email = "' .$email . '"';
                 $statement = $dbh->prepare($sql);
@@ -240,13 +235,7 @@ class Controller
     function schedule()
     {
         // DB connection
-        $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
-        require_once $path;
-        try {
-            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }
+        $dbh = $this->_validator->getDBH();
         //Call request
         $sql = "SELECT * FROM Pets WHERE PetID = :PetID";
         $stmt = $dbh->prepare($sql);
@@ -297,15 +286,7 @@ class Controller
     {
 
         // DB connection
-        $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
-        require_once $path;
-        try {
-            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }
-
-
+        $dbh = $this->_validator->getDBH();
 
         if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
@@ -439,13 +420,8 @@ class Controller
      */
     function updateAdminStatus() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $path = $_SERVER['DOCUMENT_ROOT'].'/../config.php';
-            require_once $path;
-            try {
-                $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-            } catch (PDOException $e) {
-                die($e->getMessage());
-            }
+            //DB connect
+            $dbh = $this->_validator->getDBH();
 
             $userId = $_POST['userId'];
             $isAdmin = $_POST['isAdmin'];
