@@ -40,7 +40,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 dogInformation">
-                <img class="dog-image" src="{{ @scheduleDog->getImage() }}" alt="{{ @scheduleDog->getName }}">
+                <img class="dog-image" src="{{ @scheduleDog->getImage() }}" alt="image of {{ @scheduleDog->getName() }}">
                 <h2>Schedule an appointment with {{ @scheduleDog->getName() }}!</h2>
                 <p class="card-breed">Breed: {{ @scheduleDog->getBreed() }}</p>
                 <p class="card-personality">Personality: {{ @scheduleDog->getPersonality() }}</p>
