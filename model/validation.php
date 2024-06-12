@@ -81,10 +81,60 @@ class Validators
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($result && password_verify($password, $result['Password'])) {
+            if($result['Admin'] == 1)
+            {
+                $profile = 1;
+            }
+            else
+            {
+                $profile = 0;
+
+            }
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
+    }
+
+    /**
+     * retrieveUserStatus method
+     * @param $userName String UserName
+     * @param $email String UserEmail
+     * @param $password String UserPassword
+     * @return int admin Status
+     */
+    function retrieveUserStatus($userName, $email, $password)
+    {
+        // DB connection
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/../config.php';
+        require_once $path;
+        try {
+            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            //echo "<h1>CONNECTED</h1>";
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        $sql = "SELECT * FROM CanineUsers WHERE UserName = :userName AND Email = :email";
+        $statement = $dbh->prepare($sql);
+        $statement->bindParam(':userName', $userName);
+        $statement->bindParam(':email', $email);
+
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result && password_verify($password, $result['Password'])) {
+            if ($result['Admin'] == 1) {
+                $profile = 1;
+            } else {
+                $profile = 0;
+
+            }
+            return $profile;
+        }
+        return null;
     }
 
     /**

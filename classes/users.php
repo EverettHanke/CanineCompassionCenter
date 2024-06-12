@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * Class CanineUsers
+ * AUTHORS: Everett, Pedro, Nathan
+ * FILE: users.php
+ * PURPOSE: This class represents a User with various attributes such as UserName and Email.
+ */
+/**
+ * Class CanineUsers
+ * This class represents a user once they log in.
+ */
 class CanineUsers
 {
     private $_userName;

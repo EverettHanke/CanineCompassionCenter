@@ -28,6 +28,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="login"><b>Login</b></a>
                     </li>
+                    <check if="{{ (@SESSION.user instanceof Admins) }}">
+                        <li class="nav-item">
+                            <a class="nav-link navText" href="admin"><b>Admin</b></a>
+                        </li>
+                    </check>
                 </ul>
             </div>
         </div>

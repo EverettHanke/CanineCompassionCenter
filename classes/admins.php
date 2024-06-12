@@ -1,4 +1,16 @@
 <?php
+/**
+ * AUTHORS: Everett, Pedro, Nathan
+ * FILE: admins.php
+ * PURPOSE: This file defines the Admins class, which extends the CanineUsers class.
+ * The Admins class inherits all properties and methods from the CanineUsers class.
+ */
+/**
+ * Class Admins
+ * This class represents an Admin user and extends the CanineUsers class, inheriting its properties and methods.
+ */
+
+require_once ("users.php");
 
 class Admins extends CanineUsers
 {

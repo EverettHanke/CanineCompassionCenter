@@ -128,7 +128,20 @@ class Controller
             }
             if ($this->_validator->validateLogin($userName, $userEmail, $userPassword))
             {
-                $this->_f3->reroute("admin");
+                $permissions = $this->_validator->retrieveUserStatus($userName, $userEmail, $userPassword);
+                //if user is an admin create an admin profile
+                if($permissions == 1)
+                {
+                    $this->_f3->set('SESSION.user', new Admins($userName, $userEmail, $permissions));
+                    $this->_f3->reroute("admin");
+                }
+                else
+                {
+                    $this->_f3->set('SESSION.user', new CanineUsers($userName, $userEmail));
+                    $this->_f3->reroute("ourDogs");
+                }
+
+
             }
             else if(!empty($userName) && !empty($userPassword))
             {
