@@ -417,7 +417,7 @@ class Controller
     }
 
     /**
-     * Alter a users status with checkbox button and reflects it in the database.
+     * Alter a users status with checkbox button and reflects it in the database
      */
     function updateAdminStatus() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
