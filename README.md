@@ -66,6 +66,6 @@ Temporary admin login username and password, if applicable
 [insert here]
 
 Report from GitHub
-Everette - 77 commits (2,113++, 937--)
+Everett - 77 commits (2,113++, 937--)
 Pedro - 29 commits (362++, 117--)
 Nathan - 15 commits (1,346++, 491--)
