@@ -5,7 +5,7 @@ This is a group project for SDEV 328 class with the end goal of creating our ver
 The Canine Compassion Center is a dog adoption platform designed to help users find and adopt their perfect canine companion. The platform features various functionalities, including user sign-up and login, viewing available dogs, filtering dogs based on different attributes, scheduling appointments, and admin functionalities for managing the dog database and appointments.
 
 URL of Web Application
-[insert here]
+https://everetthanke.greenriverdev.com/SDEV328/CanineCompassionCenter/
 
 Authors
 Everett, Pedro, Nathan
